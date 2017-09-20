@@ -9,7 +9,6 @@ import javax.persistence.Table;
 
 import com.botham.base.constants.GlobalConstants;
 
-
 @Entity 
 @Table(name = "jobs")
 public class Jobs implements Serializable {
