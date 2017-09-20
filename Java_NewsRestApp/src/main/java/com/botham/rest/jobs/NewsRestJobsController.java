@@ -1,5 +1,7 @@
 package com.botham.rest.jobs;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.botham.news.db.JobsRepository;
+import com.botham.news.domain.Jobs;
 
 @RestController
 public class NewsRestJobsController {
@@ -24,11 +27,15 @@ public class NewsRestJobsController {
    @RequestMapping("/jobs")
    @ResponseBody
    public ResponseEntity<JobsResult> getMultiple(@RequestParam(value="name", defaultValue="World") String name) {
+	   String mName="getMultiple";
+	   
 	   System.out.println("hi");
 	   JobsResult jr = new JobsResult();
 	   
-	   jobsRepository.findAll();
-	   
+	   List<Jobs> list = jobsRepository.findAll();
+	   for (Jobs j : list) {
+		   log.debug(mName+" jobs="+j.getDescription());
+	   }
 	   
 	   
 	   
