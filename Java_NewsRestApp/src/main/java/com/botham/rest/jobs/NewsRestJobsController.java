@@ -33,10 +33,11 @@ public class NewsRestJobsController {
 	   JobsResult jr = new JobsResult();
 	   
 
-	   
+	   int x=0;
 	   List<Jobs> list = jobsRepository.findAll();
 	   for (Jobs j : list) {
-		   log.debug(mName+" jobs="+j.getDescription());
+		   x++;
+		   log.debug(mName+" x="+x+" jobs="+j.getDescription());
 		   jr.getList().add(j);
 	   }
 	   
