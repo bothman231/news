@@ -2,9 +2,20 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.botham.news.db</groupId>
   <artifactId>Java_NewsRepo</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
+  <!-- <version>0.0.1-SNAPSHOT</version>-->
   <name>The repo (db access for news domain objects)</name>
   <description>Repo</description>
+  
+  
+  	<parent>
+		<groupId>com.botham</groupId>
+		<artifactId>Java_Parent</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+				<relativePath></relativePath>
+	</parent>
+	
+	
+	
   <build>
     <sourceDirectory>src</sourceDirectory>
     <plugins>
@@ -20,81 +31,16 @@
   </build>
   
   <dependencies>
-<dependency>
-    <groupId>org.springframework.data</groupId>
-    <artifactId>spring-data-commons</artifactId>
-    <version>1.13.7.RELEASE</version>
-</dependency>
-  
   <dependency>
     <groupId>com.botham.domain</groupId>
   <artifactId>Java_NewsDomain</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   </dependency>
-
-  
-  
-<!-- https://mvnrepository.com/artifact/org.springframework/spring-context -->
-<dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-context</artifactId>
-    <version>4.3.11.RELEASE</version>
-</dependency>
-<!-- https://mvnrepository.com/artifact/org.springframework/spring-aop -->
-<dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-aop</artifactId>
-    <version>4.3.11.RELEASE</version>
-</dependency>
-<!-- https://mvnrepository.com/artifact/org.springframework/spring-beans -->
-<dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-beans</artifactId>
-    <version>4.3.11.RELEASE</version>
-</dependency>
-<!-- https://mvnrepository.com/artifact/org.springframework/spring-core -->
-<dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-core</artifactId>
-    <version>4.3.11.RELEASE</version>
-</dependency>
-
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-test</artifactId>
-    <scope>test</scope>
-    <version>1.5.3.RELEASE</version>
-</dependency>
-  
-  
-  <!-- https://mvnrepository.com/artifact/org.springframework/spring-dao -->
-<dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-dao</artifactId>
-    <version>2.0.8</version>
-</dependency>
-
-<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
-<dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-jdbc</artifactId>
-    <version>4.3.11.RELEASE</version>
-</dependency>
-<dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-test</artifactId>
-    <version>4.3.0.RELEASE</version>
-    <scope>test</scope>
-</dependency>
   
     </dependencies>
   
   
   	<repositories>
-		<repository>
-			<id>mvn</id>
-			<name>mvn</name>
-			<url>https://mvnrepository.com/artifact/org.springframework.data/spring-data-commons</url>
-		</repository>
+
 		</repositories>
 </project>
