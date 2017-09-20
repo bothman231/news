@@ -16,5 +16,7 @@ import org.springframework.stereotype.Component;
 public interface JobsRepository extends Repository<Jobs, String> {
 
     public List<Jobs> findAll();
+    public Jobs findByName(String search);
+
 
 }

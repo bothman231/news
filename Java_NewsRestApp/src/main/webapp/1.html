@@ -1,0 +1,21 @@
+<html>
+<body>
+<input id="input" type="text">
+<input id="change" type="button" value="Click me">
+<p id="output"></p>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script>
+    var input = $("#input");
+    var output = $("#output");
+    $("#change").on('click', function() {
+        $.ajax({
+            'url' : 'http://localhost:8089/cjson/' + input.val(),
+            'type' : 'GET',
+            'dataType' : 'json',
+            'success' : function(data) {
+                output.html(data.converted);
+            }
+        });
+    });
+</script>
+</body></html>
