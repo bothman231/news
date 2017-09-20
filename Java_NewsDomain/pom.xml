@@ -16,6 +16,7 @@
 	
 	
 	<description>All the news domain objects</description>
+	
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<plugins>
