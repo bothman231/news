@@ -1,5 +1,8 @@
 package com.botham.rest.jobs;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class JobsResult {
 
 	public JobsResult() {
@@ -8,7 +11,21 @@ public class JobsResult {
 	
 	private String resultMessage = "";
 	private String output = "";
+	private List<Object> list = new ArrayList<Object>();
 	
+	
+	public List<Object> getList() {
+		return list;
+	}
+
+
+
+	public void setList(List<Object> list) {
+		this.list = list;
+	}
+
+
+
 	public String getOutput() {
 		return output;
 	}

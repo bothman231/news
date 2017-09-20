@@ -32,12 +32,15 @@ public class NewsRestJobsController {
 	   System.out.println("hi");
 	   JobsResult jr = new JobsResult();
 	   
+
+	   
 	   List<Jobs> list = jobsRepository.findAll();
 	   for (Jobs j : list) {
 		   log.debug(mName+" jobs="+j.getDescription());
+		   jr.getList().add(j);
 	   }
 	   
-	   
+
 	   
 	   
 	   jr.setOutput("OUTPUT");
