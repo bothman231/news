@@ -10,27 +10,39 @@
   <packaging>pom</packaging>
   
   
+  <properties>
+    <maven.test.skip>false</maven.test.skip>
+</properties>
+  
   <!-- Added javax.persistence for Domain objects -->
   
   <dependencies>
   
 <!--  External -->  
 <!-- Required for Domain objects mainly @Table, @Entity, @Column etc -->
+<!-- For the data layer -->
   <dependency>
     <groupId>org.eclipse.persistence</groupId>
     <artifactId>javax.persistence</artifactId>
     <version>2.2.0</version>
 </dependency>
 
-
 <dependency>
     <groupId>org.springframework.data</groupId>
     <artifactId>spring-data-commons</artifactId>
     <version>1.13.7.RELEASE</version>
 </dependency>
+
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-dao</artifactId>
+    <version>2.0.8</version>
+</dependency>
   
 
 
+
+<!-- MAIN SPRING -->
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-context</artifactId>
@@ -56,6 +68,12 @@
 </dependency>
 
 <dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-jdbc</artifactId>
+    <version>4.3.11.RELEASE</version>
+</dependency>
+
+<dependency>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-test</artifactId>
     <scope>test</scope>
@@ -64,17 +82,14 @@
   
   
 
-<dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-dao</artifactId>
-    <version>2.0.8</version>
-</dependency>
 
 
+
+<!-- Testing -->
 <dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-jdbc</artifactId>
-    <version>4.3.11.RELEASE</version>
+    <groupId>junit</groupId>
+    <artifactId>junit</artifactId>
+  <version>4.12</version>
 </dependency>
 
 <dependency>
@@ -84,6 +99,9 @@
     <scope>test</scope>
 </dependency>
 
+
+
+
 <!-- Added for @Consumes, @Produces -->
 <dependency>
     <groupId>javax.ws.rs</groupId>
@@ -92,12 +110,9 @@
 </dependency>
   
   
-  <!-- https://mvnrepository.com/artifact/junit/junit -->
-<dependency>
-    <groupId>junit</groupId>
-    <artifactId>junit</artifactId>
-  <version>4.12</version>
-</dependency>
+  
+
+
 
 
   </dependencies>
@@ -110,5 +125,17 @@
 			<url>https://mvnrepository.com/artifact/org.springframework.data/spring-data-commons</url>
 		</repository>
   </repositories>
+  
+  <build>
+  <plugins>
+  <plugin>
+   <groupId>org.apache.maven.plugins</groupId>
+   <artifactId>maven-surefire-plugin</artifactId>
+   <configuration>
+     <testFailureIgnore>true</testFailureIgnore>
+   </configuration>
+ </plugin>
+  </plugins>
+  </build>
   
 </project>

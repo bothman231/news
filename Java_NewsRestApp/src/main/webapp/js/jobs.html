@@ -1,0 +1,53 @@
+<html>
+
+<head>
+<link rel="stylesheet" media="all" href="https://s3.amazonaws.com/dynatable-docs-assets/css/jquery.dynatable.css" />
+<script src="libs/jquery-3.2.1.js"></script>
+<script src="libs/jquery.dynatable.js"></script>
+</head>
+
+
+<body>
+Jobs...........<br/><br/>
+<table id="mine" border="1" >
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Status</th>
+      <th data-dynatable-column="currentStatus">Current Status</th>
+      <th data-dynatable-column="runOnNodes">Run On Nodes</th>
+      <th data-dynatable-column="runOnInstances">Instances</th>
+      <th data-dynatable-column="lastRun">Last Run</th>
+    </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+<script>
+var jsonObj=$.parseJSON('[{"name":"createPDFsWithHeaders","description":"Create PDF headers","status":"I","currentStatus":"C","info":" ","start":1504323000027,"end":1504323000673,"lastRun":1504323000673,"schedule":" ","id":1,"notificationsSent":0,"activeStart":"00:00:00","activeEnd":"23:59:59","allowConcurrent":"N","runOnNodes":"01","runOnInstances":"B","statusAcknowledged":"N"},{"name":"unzipPublications","description":"2-Unzip publication files","status":"I","currentStatus":"C","info":" ","start":1476882780840,"end":1476882782140,"lastRun":1476882782140,"schedule":" ","id":2,"notificationsSent":0,"activeStart":"00:00:00","activeEnd":"23:59:59","allowConcurrent":"N","runOnNodes":"01","runOnInstances":"B","statusAcknowledged":"N"},{"name":"splitCombinePublications","description":"3-Split or Combine Publication files","status":"I","currentStatus":"C","info":" ","start":1504323000920,"end":1504323008997,"lastRun":1504323008997,"schedule":" ","id":3,"notificationsSent":0,"activeStart":"00:00:00","activeEnd":"23:59:59","allowConcurrent":"N","runOnNodes":"01","runOnInstances":"B","statusAcknowledged":"N"},{"name":"archivePubs","description":"Archive complete pubs and articles","status":"I","currentStatus":"C","info":" ","start":1368676800000,"end":1368676800000,"lastRun":1382401801050,"schedule":" ","id":4,"notificationsSent":0,"activeStart":"00:00:00","activeEnd":"17:30:00","allowConcurrent":"Y","runOnNodes":"01","runOnInstances":"B","statusAcknowledged":"Y"},{"name":"backupArticles","description":"Backup articles","status":"I","currentStatus":"C","info":"921375","start":1499507113317,"end":1499507113330,"lastRun":1499507113330,"schedule":" ","id":5,"notificationsSent":0,"activeStart":"04:00:00","activeEnd":"06:00:00","allowConcurrent":"Y","runOnNodes":"01","runOnInstances":"B","statusAcknowledged":"Y"},{"name":"readPublications","description":"Read Publications","status":"I","currentStatus":"C","info":" ","start":1504323009983,"end":1504323014333,"lastRun":1504323014333,"schedule":" ","id":6,"notificationsSent":0,"activeStart":"00:00:00","activeEnd":"23:59:59","allowConcurrent":"N","runOnNodes":"01","runOnInstances":"B","statusAcknowledged":"N"},{"name":"processOnlineReaderFiles","description":"1-Process Online Reader","status":"I","currentStatus":"C","info":"","start":1505062680317,"end":1505062680350,"lastRun":1505062680350,"schedule":" ","id":7,"notificationsSent":0,"activeStart":"00:00:00","activeEnd":"23:59:59","allowConcurrent":"N","runOnNodes":"ALL","runOnInstances":"ALL","statusAcknowledged":"N"},{"name":"autoVerify","description":"Auto Verify Articles","status":"I","currentStatus":"C","info":" ","start":1504323009327,"end":1504323009973,"lastRun":1504323009973,"schedule":" ","id":8,"notificationsSent":0,"activeStart":"00:00:00","activeEnd":"23:59:59","allowConcurrent":"N","runOnNodes":"01","runOnInstances":"B","statusAcknowledged":"N"},{"name":"reports","description":"Reports","status":"A","currentStatus":"C","info":" ","start":1504275183607,"end":1504275188547,"lastRun":1504275188547,"schedule":"D","id":9,"notificationsSent":0,"activeStart":"10:00:00","activeEnd":"23:59:59","allowConcurrent":"Y","runOnNodes":"01","runOnInstances":"B","statusAcknowledged":"N"},{"name":"processStagingDirs","description":"Process Staging Dirs","status":"I","currentStatus":"C","info":" ","start":1505060340483,"end":1505060282560,"lastRun":1505060282560,"schedule":" ","id":10,"notificationsSent":0,"activeStart":"00:00:00","activeEnd":"23:59:59","allowConcurrent":"N","runOnNodes":"ALL","runOnInstances":"ALL","statusAcknowledged":"N"},{"name":"getPubsFromURL","description":"Get pubs from URL","status":"I","currentStatus":"C","info":" ","start":1504270038487,"end":1504270038597,"lastRun":1504270038597,"schedule":" ","id":11,"notificationsSent":0,"activeStart":"05:00:00","activeEnd":"09:00:00","allowConcurrent":"N","runOnNodes":"01","runOnInstances":"B","statusAcknowledged":"N"},{"name":"fileAgent","description":"File Agent","status":"I","currentStatus":"C","info":" ","start":1453383122280,"end":1453383416237,"lastRun":1453383416237,"schedule":" ","id":12,"notificationsSent":0,"activeStart":"05:00:00","activeEnd":"09:00:00","allowConcurrent":"N","runOnNodes":"01","runOnInstances":"B","statusAcknowledged":"N"},{"name":"statusChecks","description":"Status Checks","status":"I","currentStatus":"C","info":" ","start":1499508000420,"end":1499508002770,"lastRun":1499508002770,"schedule":"N","id":13,"notificationsSent":0,"activeStart":"05:00:00","activeEnd":"23:00:00","allowConcurrent":"N","runOnNodes":"01","runOnInstances":"C","statusAcknowledged":"N"},{"name":"heartbeat","description":"HeartBeat","status":"I","currentStatus":"C","info":" ","start":1453383122280,"end":1453383416237,"lastRun":1453383416237,"schedule":" ","id":14,"notificationsSent":0,"activeStart":"05:00:00","activeEnd":"09:00:00","allowConcurrent":"N","runOnNodes":"ALL","runOnInstances":"ALL","statusAcknowledged":"N"},{"name":"readEmails","description":"Read Emails","status":"I","currentStatus":"C","info":" ","start":1453383122280,"end":1453383416237,"lastRun":1453383416237,"schedule":" ","id":15,"notificationsSent":0,"activeStart":"00:00:00","activeEnd":"23:59:59","allowConcurrent":"N","runOnNodes":"ALL","runOnInstances":"ALL","statusAcknowledged":"N"}]')
+
+
+$('#mine').dynatable({
+	  dataset: {
+		    records: jsonObj
+		  },
+	  features: {
+		    paginate: true,
+		    search: true,
+		    recordCount: true,
+		    perPageSelect: true
+		  },
+		  inputs: {
+			    queries: $('#search')
+			  }
+});
+</script>
+	
+	</br>
+	</br>
+
+
+<div></div>
+</body>
+</html>
