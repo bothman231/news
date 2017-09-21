@@ -74,7 +74,7 @@ public class ApplicationTest {
         
     }
     
-    @Test
+    //@Test
     public void bfindAllTestFail() throws Exception {
     	String mName="findAllTest";
     	int jobs=jobsRepository.findAll().size();
