@@ -11,6 +11,7 @@
   
   
   <properties>
+<!-- Will not run tests if set to true -->  
     <maven.test.skip>false</maven.test.skip>
 </properties>
   
@@ -115,7 +116,7 @@
 
   </dependencies>
   
-  
+<!-- Remote repository where we look for the depepdencies -->  
   <repositories>
   		<repository>
 			<id>mvn</id>
@@ -124,6 +125,10 @@
 		</repository>
   </repositories>
   
+  
+<!-- Maven Surefire Plugin. ... The Surefire Plugin is used during the test phase of the build --> 
+<!-- lifecycle to execute the unit tests of an application. It generates reports in two different -->
+<!-- file formats: Plain text files (*.txt) XML files (*.xml) -->  
   <build>
   <plugins>
   <plugin>
