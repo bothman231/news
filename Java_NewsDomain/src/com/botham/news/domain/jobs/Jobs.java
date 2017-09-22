@@ -1,4 +1,4 @@
-package com.botham.news.domain;
+package com.botham.news.domain.jobs;
 
 import java.io.Serializable;
 
