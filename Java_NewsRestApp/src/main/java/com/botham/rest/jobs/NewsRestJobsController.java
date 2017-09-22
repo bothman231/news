@@ -2,6 +2,9 @@ package com.botham.rest.jobs;
 
 import java.util.List;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.Produces;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +26,8 @@ public class NewsRestJobsController {
 	
    @Autowired
    JobsRepository jobsRepository;
-   
+   @Consumes({"application/xml", "application/json","text/plain,text/html"})
+   @Produces({"application/xml", "application/json","text/plain,text/html"})
    @RequestMapping("/jobs")
    @ResponseBody
    public ResponseEntity<JobsResult> getMultiple(@RequestParam(value="name", defaultValue="World") String name) {
