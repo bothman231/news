@@ -30,23 +30,19 @@ public class CustomerConfig {
     public LocalContainerEntityManagerFactoryBean customerEntityManager() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(customerDataSource());
-        em.setPackagesToScan(new String[] { "com.botham.news.domain" });
- 
+        em.setPackagesToScan("com.botham.news.domain");
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
         HashMap<String, Object> properties = new HashMap<>();
         properties.put("hibernate.hbm2ddl.auto", env.getProperty("post.hibernate.hbm2ddl.auto"));
         properties.put("hibernate.dialect", env.getProperty("post.hibernate.dialect"));
         em.setJpaPropertyMap(properties);
- 
         return em;
     }
     
-    
     @Primary
     @Bean
-    public DataSource customerDataSource() {
-  
+    public DataSource customerDataSource() {  
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName(env.getProperty("post.jdbc.driver-class-name"));
         dataSource.setUrl(env.getProperty("post.jdbc.url"));
@@ -57,14 +53,9 @@ public class CustomerConfig {
  
     @Primary
     @Bean
-    public PlatformTransactionManager customerTransactionManager() {
-  
+    public PlatformTransactionManager customerTransactionManager() {  
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(customerEntityManager().getObject());
         return transactionManager;
     }
-
-    
-    
-    
 }

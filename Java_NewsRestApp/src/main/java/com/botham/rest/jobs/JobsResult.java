@@ -11,7 +11,7 @@ public class JobsResult {
 	
 	private String resultMessage = "";
 	private String output = "";
-	private List<Object> list = new ArrayList<Object>();
+	private List<Object> list = new ArrayList<>();
 	
 	
 	public List<Object> getList() {

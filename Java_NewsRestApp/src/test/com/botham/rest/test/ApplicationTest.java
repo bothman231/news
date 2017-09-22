@@ -36,7 +36,15 @@ public class ApplicationTest {
 	   @Autowired
 	   JobsRepository jobsRepository;
 	   
-	   public static boolean firstTimeStart=true;
+	   private boolean firstTimeStart=true;
+
+	public boolean isFirstTimeStart() {
+		return firstTimeStart;
+	}
+
+	public void setFirstTimeStart(boolean firstTimeStart) {
+		this.firstTimeStart = firstTimeStart;
+	}
 
 	@Before
 	public void start() {

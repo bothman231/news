@@ -22,7 +22,7 @@ public class Jobs implements Serializable {
 	public static final String STATUS_ERROR="E";
 	
 	public Jobs() {
-
+// Constructor
 	}
 	
 	@Id
@@ -151,7 +151,7 @@ public class Jobs implements Serializable {
 	}
 
 	public String toString() {
-		StringBuffer sb = new StringBuffer();
+		StringBuilder sb = new StringBuilder();
 		sb.append("name=" + name + GlobalConstants.FIELD_DELIM
 				+ GlobalConstants.ROW_DELIM);
 		sb.append("description=" + description + GlobalConstants.FIELD_DELIM

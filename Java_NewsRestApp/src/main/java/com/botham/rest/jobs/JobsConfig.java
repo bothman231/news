@@ -16,9 +16,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 
-
 // http://www.baeldung.com/spring-data-jpa-multiple-databases
-	
 	
 @Configuration
 @PropertySource({ "classpath:db.properties" })
@@ -34,7 +32,7 @@ public class JobsConfig {
     public LocalContainerEntityManagerFactoryBean jobsEntityManager() {
         LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setDataSource(jobsDataSource());
-        em.setPackagesToScan(new String[] { "com.botham.news.domain" });
+        em.setPackagesToScan("com.botham.news.domain");
  
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         em.setJpaVendorAdapter(vendorAdapter);
@@ -46,8 +44,7 @@ public class JobsConfig {
  
         return em;
     }
-    
-    
+        
     @Bean
     public DataSource jobsDataSource() {
   
@@ -61,13 +58,8 @@ public class JobsConfig {
  
     @Bean
     public PlatformTransactionManager jobsTransactionManager() {
-  
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(jobsEntityManager().getObject());
         return transactionManager;
-    }
-
-    
-    
-    
+    }    
 }
