@@ -1,4 +1,4 @@
-package com.botham.base.constants;
+package com.botham.base;
 
 public class GlobalConstants {
 	
