@@ -5,14 +5,15 @@
   <groupId>com.botham</groupId>
   <artifactId>Java_Parent</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  
-  
   <packaging>pom</packaging>
   
+  
+
   
   <properties>
 <!-- Will not run tests if set to true -->  
     <maven.test.skip>false</maven.test.skip>
+    <springVersion>4.3.11.RELEASE</springVersion>
 </properties>
   
   <!-- Added javax.persistence for Domain objects -->
@@ -45,42 +46,42 @@
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-context</artifactId>
-    <version>4.3.11.RELEASE</version>
+    <version>${springVersion}</version>
 </dependency>
 
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-aop</artifactId>
-    <version>4.3.11.RELEASE</version>
+    <version>${springVersion}</version>
 </dependency>
 
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-beans</artifactId>
-    <version>4.3.11.RELEASE</version>
+    <version>${springVersion}</version>
 </dependency>
 
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-core</artifactId>
-    <version>4.3.11.RELEASE</version>
+    <version>${springVersion}</version>
 </dependency>
 
 <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-jdbc</artifactId>
-    <version>4.3.11.RELEASE</version>
+    <version>${springVersion}</version>
 </dependency>
 
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-test</artifactId>
-    <scope>test</scope>
-    <version>1.5.3.RELEASE</version>
-</dependency>
-  
-  
 
+
+  
+ <dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-test</artifactId>
+   <version>1.5.7.RELEASE</version>
+  <scope>test</scope>
+</dependency>
 
 
 
@@ -95,10 +96,13 @@
     <groupId>org.springframework</groupId>
     <artifactId>spring-test</artifactId>
     <version>4.3.0.RELEASE</version>
-    <scope>test</scope>
 </dependency>
 
-
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-test</artifactId>
+    <version>4.3.10.RELEASE</version>
+</dependency>
 
 
 <!-- Added for @Consumes, @Produces -->
@@ -143,6 +147,7 @@
   <plugin>
    <groupId>org.apache.maven.plugins</groupId>
    <artifactId>maven-surefire-plugin</artifactId>
+   <version>2.20.1</version>
    <configuration>
      <testFailureIgnore>true</testFailureIgnore>
    </configuration>
