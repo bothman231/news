@@ -7,7 +7,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import com.botham.base.constants.GlobalConstants;
+import com.botham.base.GlobalConstants;
+
+
 
 @Entity 
 @Table(name = "jobs")
@@ -23,6 +25,8 @@ public class Jobs implements Serializable {
 	
 	public Jobs() {
 // Constructor
+		name="";
+		
 	}
 	
 	@Id

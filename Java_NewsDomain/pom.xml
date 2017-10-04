@@ -3,16 +3,20 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.botham.domain</groupId>
 	<artifactId>Java_NewsDomain</artifactId>
-	<!-- <version>0.0.1-SNAPSHOT</version> -->
+	<version>0.0.1-SNAPSHOT</version>
 	<name>NewsDomain</name>
 	
+	<properties>
+			<springBootStarterJpaVersion>1.5.7.RELEASE</springBootStarterJpaVersion>
+			</properties>
 	
-	<parent>
-		<groupId>com.botham</groupId>
-		<artifactId>Java_Parent</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-				<relativePath></relativePath>
-	</parent>
+	
+<!-- 	<parent> -->
+<!-- 		<groupId>com.botham</groupId> -->
+<!-- 		<artifactId>Java_Parent</artifactId> -->
+<!-- 		<version>0.0.1-SNAPSHOT</version> -->
+<!-- 				<relativePath></relativePath> -->
+<!-- 	</parent> -->
 	
 	
 	<description>All the news domain objects</description>
@@ -41,6 +45,13 @@
     <artifactId>Java_Base</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 </dependency>
+
+		 <dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<version>${springBootStarterJpaVersion}</version>
+		</dependency>
+		
 
 	</dependencies>
 </project>
