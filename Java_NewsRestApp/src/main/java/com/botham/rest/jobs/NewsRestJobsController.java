@@ -97,6 +97,9 @@ public class NewsRestJobsController {
    @ResponseBody
    public ResponseEntity<JobsResult> get() {
 	   String mName="get";
+	   if (log.isDebugEnabled()) {
+		   log.debug(mName+" Starts");
+	   }
 	   
 	   JobsResult jr = new JobsResult();
 	   boolean quickTest=true;

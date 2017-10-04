@@ -2,10 +2,7 @@
 package com.botham.news.domain.test;
 
 import org.springframework.test.context.junit4.SpringRunner;
-
-import com.botham.base.GlobalConstants;
 import com.botham.news.domain.jobs.Jobs;
-
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
