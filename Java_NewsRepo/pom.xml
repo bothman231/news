@@ -2,17 +2,17 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.botham.news.db</groupId>
   <artifactId>Java_NewsRepo</artifactId>
-  <!-- <version>0.0.1-SNAPSHOT</version>-->
+   <version>0.0.1-SNAPSHOT</version>
   <name>The repo (db access for news domain objects)</name>
   <description>Repo</description>
   
   
-  	<parent>
-		<groupId>com.botham</groupId>
-		<artifactId>Java_Parent</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-				<relativePath></relativePath>
-	</parent>
+<!--   	<parent> -->
+<!-- 		<groupId>com.botham</groupId> -->
+<!-- 		<artifactId>Java_Parent</artifactId> -->
+<!-- 		<version>0.0.1-SNAPSHOT</version> -->
+<!-- 				<relativePath></relativePath> -->
+<!-- 	</parent> -->
 	
 	
 	

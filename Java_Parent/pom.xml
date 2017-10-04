@@ -13,7 +13,10 @@
   <properties>
 <!-- Will not run tests if set to true -->  
     <maven.test.skip>false</maven.test.skip>
-    <springVersion>4.3.11.RELEASE</springVersion>
+    <springVersion>4.3.10.RELEASE</springVersion>
+    <springBootStarterTestVersion>1.5.7.RELEASE</springBootStarterTestVersion>
+    <springBootStarterJpaVersion>1.5.7.RELEASE</springBootStarterJpaVersion>
+        <springBootStarterVersion>1.5.7.RELEASE</springBootStarterVersion>
 </properties>
   
   <!-- Added javax.persistence for Domain objects -->
@@ -49,11 +52,11 @@
     <version>${springVersion}</version>
 </dependency>
 
-<dependency>
+<!-- <dependency>
     <groupId>org.springframework</groupId>
     <artifactId>spring-aop</artifactId>
     <version>${springVersion}</version>
-</dependency>
+</dependency>-->
 
 <dependency>
     <groupId>org.springframework</groupId>
@@ -79,11 +82,36 @@
  <dependency>
   <groupId>org.springframework.boot</groupId>
   <artifactId>spring-boot-starter-test</artifactId>
-   <version>1.5.7.RELEASE</version>
+   <version>${springBootStarterTestVersion}</version>
   <scope>test</scope>
 </dependency>
 
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-test</artifactId>
+   <version>${springBootStarterTestVersion}</version>
+    <scope>test</scope>
+</dependency>
 
+
+
+
+
+
+
+
+		
+			 	<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+						<version>${springBootStarterJpaVersion}</version>
+		</dependency>
+
+	 	<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+						<version>${springBootStarterJpaVersion}</version>
+		</dependency>
 
 <!-- Testing -->
 <dependency>
@@ -92,11 +120,11 @@
   <version>4.12</version>
 </dependency>
 
-<dependency>
-    <groupId>org.springframework</groupId>
-    <artifactId>spring-test</artifactId>
-    <version>4.3.0.RELEASE</version>
-</dependency>
+<!-- <dependency> -->
+<!--     <groupId>org.springframework</groupId> -->
+<!--     <artifactId>spring-test</artifactId> -->
+<!--     <version>4.3.0.RELEASE</version> -->
+<!-- </dependency> -->
 
 <dependency>
     <groupId>org.springframework</groupId>
