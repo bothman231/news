@@ -9,7 +9,6 @@ import org.junit.runners.MethodSorters;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import com.botham.news.db.jobs.JobsRepository;
@@ -27,7 +26,6 @@ import com.botham.news.db.jobs.JobsRepository;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(SpringRunner.class)
-@SpringBootTest
 public class ApplicationTest {
 
 	   Logger log = LoggerFactory.getLogger(ApplicationTest.class);

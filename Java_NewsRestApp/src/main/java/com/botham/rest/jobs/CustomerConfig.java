@@ -15,6 +15,8 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 
+//  <a href="http://www.baeldung.com/spring-data-jpa-multiple-databases">hi</a>
+
 @Configuration
 @PropertySource({ "classpath:db.properties" })
 @EnableJpaRepositories(basePackages = "com.botham.news.db", 

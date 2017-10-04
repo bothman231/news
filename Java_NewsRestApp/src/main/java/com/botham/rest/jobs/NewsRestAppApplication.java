@@ -1,4 +1,4 @@
-package com.botham;
+package com.botham.rest.jobs;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
