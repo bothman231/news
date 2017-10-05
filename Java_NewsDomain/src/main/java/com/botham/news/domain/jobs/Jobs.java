@@ -29,7 +29,7 @@ public class Jobs implements Serializable {
 		
 	}
 	
-	@Id
+	//@Id
 	@Column(name = "jobs_name", length = 50)
 	private String name;
 	
@@ -130,7 +130,7 @@ public class Jobs implements Serializable {
 		this.schedule = schedule;
 	}
 	
-	
+	@Id
 	@Column(name = "jobs_id")
 	private int id;
 	
