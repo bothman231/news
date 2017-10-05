@@ -89,8 +89,7 @@ import com.botham.news.rest.Thing;
 		
 		ResponseEntity<RestEntity> responseEntity1 = new ResponseEntity<RestEntity>(re, HttpStatus.OK);
 
-		
-		   
+				   
 		return responseEntity1;
 	   }
 	   
