@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<HTML>
+<head>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<BODY>
+
+<form method="get" name="jobs_form" id="jobs_form" action="" class="form_class"  >
+
+<p class="button">
+<input type="Button" onclick="form_sub()" value= "Get Job(s)" style="font-size : 20px; width: 100%; height: 100px;"  />
+</p>
+Id <input type="text" name ="id" maxlength="3" style="font-size : 20px;"/>
+<p class="reg">This is some text</p>
+<p>This is some more</p>
+
+</form>
+
+<table border="1">
+<tr>
+<td>Job1</td>
+</tr>
+</table>
+
+<script>
+function form_sub() {
+	var x = document.getElementsByName('jobs_form');
+	alert("here");
+	x[0].action="https://www.google.com";
+	x[0].action="http://localhost:8095/jobs";
+	x[0].submit(); // Form submission
+}
+</script>
+</BODY>
+</HTML>

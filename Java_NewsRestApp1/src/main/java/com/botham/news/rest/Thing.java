@@ -1,4 +1,4 @@
-package com.botham.news.rest.Java_NewsRestApp1;
+package com.botham.news.rest;
 
 public class Thing {
 	
