@@ -91,9 +91,7 @@ import com.botham.news.rest.Thing;
 				   
 		return responseEntity1;
 	   }
-	   
-	  	   
-	   
+	   	   
 	   @Consumes({"*", "application/xml", "application/json", "text/plain,text/html"})
 	   @Produces({"application/xml", "application/json", "text/plain,text/html"})
 	   @RequestMapping("/t")
