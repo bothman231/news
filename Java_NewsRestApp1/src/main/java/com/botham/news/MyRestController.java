@@ -88,7 +88,6 @@ import com.botham.news.rest.Thing;
 		re.setObjects((List<Person>) getPersons());
 		
 		ResponseEntity<RestEntity> responseEntity1 = new ResponseEntity<RestEntity>(re, HttpStatus.OK);
-
 				   
 		return responseEntity1;
 	   }
