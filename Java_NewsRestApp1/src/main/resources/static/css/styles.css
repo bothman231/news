@@ -27,4 +27,10 @@ p.reg {
 table {
 	font-size: 50px;
 }
+p.gridheader {
+	color: red;
+}
+div.gridheader {
+	color: red;
+}
 }

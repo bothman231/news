@@ -3,14 +3,17 @@
 <head>
     <title>Getting Started: Serving Web Content</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="refresh" content="30" />
+        <LINK href="../css/stylesheet.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
-<!--     <p th:text="'Hello, ' + ${name} + '!'" /> -->
-<!--     <p th:text="${name}"/> -->
+
+ <div th:replace="fragments/header :: header"></div>
+
 
 
 <center>
-
+ <div th:replace="fragments/gridheader :: gridheader"></div>
 	<table border="1">
 
 		<tr>
@@ -87,6 +90,9 @@
 		</tr>
 	</table>
 	
+	 <div th:replace="fragments/gridfooter :: gridfooter"></div>
 	</center>
+	
+	 <div th:replace="fragments/footer :: footer"></div>
 </body>
 </html>

@@ -5,6 +5,8 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.annotation.PostConstruct;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Produces;
 
@@ -222,6 +224,12 @@ import com.botham.news.rest.Thing;
 		}
 		String ip = addr.getHostAddress();
 		System.out.println("Ip: " + ip);
+	}
+	
+	
+	@PostConstruct
+	public void startedUp() {
+		log.debug("Controller is up...");
 	}
 	   
 	}
