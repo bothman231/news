@@ -5,31 +5,88 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-    <p th:text="'Hello, ' + ${name} + '!'" />
-    <p th:text="${name}"/>
+<!--     <p th:text="'Hello, ' + ${name} + '!'" /> -->
+<!--     <p th:text="${name}"/> -->
+
+
+<center>
 
 	<table border="1">
-      
-      		 <tr>
-   <th>Name</th>
-   <th>Description</th>
- </tr>
-      
-      
+
+		<tr>
+		
+					<h1 th:if="${columns.containsKey('id')}">
+				<th th:text="${columns.get('id')}"></th>
+			</h1>
+
+			<h1 th:if="${columns.containsKey('name')}">
+				<th th:text="${columns.get('name')}"></th>
+			</h1>
+			
+					<h1 th:if="${columns.containsKey('description')}">
+			   	<th th:text="${columns.get('description')}"></th>
+			</h1>
+			
+			<h1 th:if="${columns.containsKey('status')}">
+					<th th:text="${columns.get('status')}"></th>
+		    </h1>
+
+	
+
+
+			<h1 th:if="${columns.containsKey('lastRun')}">
+				<th th:text="${columns.get('lastRun')}"></th>
+			</h1>
+			
+						<h1 th:if="${columns.containsKey('runOnInstances')}">
+								<th th:text="${columns.get('runOnInstances')}"></th>
+			</h1>
+			
+									<h1 th:if="${columns.containsKey('runOnNodes')}">
+								<th th:text="${columns.get('runOnNodes')}"></th>
+			</h1>
+			
+	
+		</tr>
+
+
 		<tr th:each="job : ${jobs}">
 		
-
-			<td><a href="#" th:text="${job.name}"></a></td>
+		    	    <h1 th:if="${columns.containsKey('id')}">
+			   <td><a href="#" th:text="${job.id}"></a></td>
+			</h1> 
+			
+    	    <h1 th:if="${columns.containsKey('name')}">
+			   <td><a href="#" th:text="${job.name}"></a></td>
+			</h1> 
 			   	
-    	    <h1 th:if="${columns.containsKey('description1')}">
+    	    <h1 th:if="${columns.containsKey('description')}">
     	    	<td th:text="${job.description}"></td>
     	    </h1> 
     
-    	
-			<td th:text="${job.status}"></td>
-			<td th:text="${job.lastRun}"></td>
-
+    	    	    <h1 th:if="${columns.containsKey('status')}">
+    	    	<td th:text="${job.status}"></td>
+    	    	<td th:text="${job.status}"></td>
+    	    </h1> 
+    	    
+    	     <h1 th:if="${columns.containsKey('lastRun')}">
+    	    	<td th:text="${job.lastRun}"></td>
+    	    </h1> 
+    	    
+    	     <h1 th:if="${columns.containsKey('runOnInstances')}">
+    	    	<td th:text="${job.runOnInstances}"></td>
+    	    </h1> 
+    	    
+    	     	     <h1 th:if="${columns.containsKey('runOnNodes')}">
+    	    	<td th:text="${job.runOnNodes}"></td>
+    	    </h1> 
+    	    
+    	    <td>
+    	    <button th:text="#{msg_warning}" th:attr="onclick='return confirm(\'' + #{msg_confirm_warning} + '\');'">Delete</button>
+</td>
 		</tr>
 	</table>
+	
+	</center>
 </body>
 </html>

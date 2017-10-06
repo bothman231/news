@@ -40,6 +40,25 @@ public class WebMvcController {
         columns.put("name", "Name");
         columns.put("description", "Desc.");
         columns.put("lastRun", "Last");
+        columns.put("status", "Status");
+        columns.put("currentStatus", "Current Status");
+        columns.put("start", "Start");
+        columns.put("end", "End");
+        columns.put("info", "Info");
+        columns.put("schedule", "Schedule");
+        columns.put("id", "Id");
+        columns.put("notificationsSent", "NS");
+        
+        columns.put("activeStart", "Active Start");
+        columns.put("activeEnd", "Active End");
+        
+        columns.put("runOnInstances", "Instance");
+        columns.put("runOnNodes", "Nodes");
+        columns.put("statusAcknowledged", "Ack");
+
+        
+        
+
         
         
         boolean firstTime=true;
