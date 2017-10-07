@@ -1,0 +1,21 @@
+body {
+    background-color: grey;
+}
+h1 {
+    color: blue;
+}
+p {
+    color: red;
+}
+div.gridheader {
+	color: red;
+}
+div.gridfooter {
+	color: green;
+}
+div.header {
+	color: yellow;
+}
+div.footer {
+	color: white;
+}
