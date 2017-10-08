@@ -42,6 +42,13 @@ public class WebMvcController {
     		log.debug(mName+" Starts "+"pagesize="+pageSize);
     		log.debug(mName+"        "+"search="+search);
     	}
+    	
+    	
+    	if (pageSize==null || pageSize.isEmpty()) {
+    	   pageSize="5";	
+    	}
+    	
+    	
         model.addAttribute("name", name);
         
         Map <String, String> columns = new TreeMap<String, String>();
@@ -69,7 +76,7 @@ public class WebMvcController {
         
         
         int startPage=0;
-        int pageSize1=5;
+        //int pageSize1=5;
         
         
         boolean firstTime=true;
@@ -79,7 +86,7 @@ public class WebMvcController {
         
 		//List<Jobs> jobsList = jobsRepository.findAll();
 		//List<Jobs> jobsList = jobsRepository.findByNameLike("%"+search+"%");
-		List<Jobs> jobsList = jobsRepository.findByNameLike(new PageRequest(startPage, pageSize1), "%"+search+"%");
+		List<Jobs> jobsList = jobsRepository.findByNameLike(new PageRequest(startPage, Integer.parseInt(pageSize)), "%"+search+"%");
 		
 		for (Jobs j:jobsList) {
 			
