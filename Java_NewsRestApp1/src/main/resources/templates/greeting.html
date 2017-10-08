@@ -11,8 +11,40 @@
  <div th:replace="fragments/header :: header"></div>
 
 
-
 <center>
+
+	<table border="1">
+
+		<tr>
+
+			<td>
+
+				<form action="#" method="get">
+
+					Search <input type="text" name="search" size="20" maxlength="20"
+						th:value="${search}" onkeyup="resetTimer = true" /> <input
+						type="submit" name="go" width="10" value="Search" /> Page size <input
+						type="text" name="pageSize" size="3" maxlength="3"
+						th:value="${pageSize}" />
+
+				</form>
+
+				<form action="#" method="get">
+
+					<input type="submit" name="reset" width="10"
+						value="Reset search Criteria" />
+
+				</form>
+
+			</td>
+
+		</tr>
+
+	</table>
+</center>
+
+
+	<center>
  <div th:replace="fragments/gridheader :: gridheader"></div>
 	<table border="1">
 

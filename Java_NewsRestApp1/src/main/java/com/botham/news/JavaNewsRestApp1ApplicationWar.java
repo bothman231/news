@@ -8,6 +8,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 
+// https://www.mkyong.com/spring-boot/spring-boot-deploy-war-file-to-tomcat/
+
 @SpringBootApplication
 @Configuration
 @ComponentScan(basePackages = {"com.botham"})

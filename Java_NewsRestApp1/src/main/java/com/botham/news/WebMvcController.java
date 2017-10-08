@@ -8,6 +8,7 @@ import java.util.TreeMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,10 +31,17 @@ public class WebMvcController {
 	   
 	   
     @RequestMapping("/greeting")
-    public String greeting(@RequestParam(value="name", required=false, defaultValue="World") String name, Model model) {
+    public String greeting(@RequestParam(value="name", required=false, defaultValue="World") String name,
+    		               @RequestParam(value="pageSize", required=false, defaultValue="5") String pageSize,
+    		               @RequestParam(value="search", required=false, defaultValue="") String search,
+    		               Model model) {
     	
 
     	String mName="greeting";
+    	if (log.isDebugEnabled()) {
+    		log.debug(mName+" Starts "+"pagesize="+pageSize);
+    		log.debug(mName+"        "+"search="+search);
+    	}
         model.addAttribute("name", name);
         
         Map <String, String> columns = new TreeMap<String, String>();
@@ -57,8 +65,11 @@ public class WebMvcController {
         columns.put("statusAcknowledged", "Ack");
 
         
+        //Pageable 
         
-
+        
+        int startPage=0;
+        int pageSize1=5;
         
         
         boolean firstTime=true;
@@ -66,7 +77,9 @@ public class WebMvcController {
         
         StringBuilder html=new StringBuilder("");
         
-		List<Jobs> jobsList = jobsRepository.findAll();
+		//List<Jobs> jobsList = jobsRepository.findAll();
+		//List<Jobs> jobsList = jobsRepository.findByNameLike("%"+search+"%");
+		List<Jobs> jobsList = jobsRepository.findByNameLike(new PageRequest(startPage, pageSize1), "%"+search+"%");
 		
 		for (Jobs j:jobsList) {
 			
@@ -111,6 +124,10 @@ public class WebMvcController {
     	if (columns.containsKey("description")) {
     		
     	}
+    	
+    	model.addAttribute("search", search);    	
+    	model.addAttribute("pageSize", pageSize);
+    	
         
         log.debug(mName+"html="+html);
         return "greeting";
