@@ -139,5 +139,20 @@ public class WebMvcController {
         log.debug(mName+"html="+html);
         return "greeting";
     }
+    
+    
+    @RequestMapping("/toggleStatus")
+    public String greeting(@RequestParam(value="id", required=false, defaultValue="") String id,
+    		               Model model) {
+    	
+
+    	String mName="toggleStatus";
+    	if (log.isDebugEnabled()) {
+    		log.debug(mName+" Starts "+"id="+id);
+    	}
+    	
+        return "greeting";
+    }
+    	
 
 }

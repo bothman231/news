@@ -48,6 +48,9 @@
  <div th:replace="fragments/gridheader :: gridheader"></div>
 	<table border="1">
 
+
+
+<!-- Deal with column headers -->
 		<tr>
 		
 					<h1 th:if="${columns.containsKey('id')}">
@@ -64,6 +67,8 @@
 			
 			<h1 th:if="${columns.containsKey('status')}">
 					<th th:text="${columns.get('status')}"></th>
+	<th th:text="Toggle"></th>
+					
 		    </h1>
 
 	
@@ -85,6 +90,7 @@
 		</tr>
 
 
+<!-- Actual column values -->
 		<tr th:each="job : ${jobs}">
 		
 		    	    <h1 th:if="${columns.containsKey('id')}">
@@ -97,14 +103,19 @@
 			   	
     	    <h1 th:if="${columns.containsKey('description')}">
     	    	<td th:text="${job.description}"></td>
-    	    </h1> 
-    
-    	    	    <h1 th:if="${columns.containsKey('status')}">
-    	    	<td th:text="${job.status}"></td>
-    	    	<td th:text="${job.status}"></td>
-    	    </h1> 
-    	    
-    	     <h1 th:if="${columns.containsKey('lastRun')}">
+    	    </h1>
+
+				<h1 th:if="${columns.containsKey('status')}">
+					<td th:text="${job.status}"></td>
+					<td>
+						<form action="#" method="get">
+
+							<input type="submit" name="toggleStatus" width="10" value="Toggle" />
+						</form>
+					</td>
+				</h1>
+
+				<h1 th:if="${columns.containsKey('lastRun')}">
     	    	<td th:text="${job.lastRun}"></td>
     	    </h1> 
     	    
