@@ -15,34 +15,34 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.5.7.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>1.8</java.version>
-		
 
-		 <maven.test.skip>true</maven.test.skip> 
-		 
-      <!-- <start-class>com.botham.news.JavaNewsRestApp1Application</start-class>-->
-      <start-class>com.botham.news.JavaNewsRestApp1ApplicationWar</start-class>
-</properties>
+
+		<maven.test.skip>true</maven.test.skip>
+
+		<!-- <start-class>com.botham.news.JavaNewsRestApp1Application</start-class> -->
+		<start-class>com.botham.news.JavaNewsRestApp1ApplicationWar</start-class>
+	</properties>
 
 
 
 	<dependencies>
-	
-	
-	     <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-tomcat</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        
-        
-        
+
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-tomcat</artifactId>
+			<scope>provided</scope>
+		</dependency>
+
+
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -61,35 +61,35 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
-<!-- Use this as view resolver, without this you will get a 500 -->		
-		        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-		
-<!-- Required for data access -->		
-				<dependency>
+
+		<!-- Use this as view resolver, without this you will get a 500 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+		</dependency>
+
+		<!-- Required for data access -->
+		<dependency>
 			<groupId>com.microsoft.sqlserver</groupId>
 			<artifactId>sqljdbc4</artifactId>
 			<version>4.0</version>
 		</dependency>
-		
-		
+
+
 		<!-- Added for @Consumes, @Produces -->
-<dependency>
-    <groupId>javax.ws.rs</groupId>
-    <artifactId>javax.ws.rs-api</artifactId>
-    <version>2.1</version>
-</dependency>
+		<dependency>
+			<groupId>javax.ws.rs</groupId>
+			<artifactId>javax.ws.rs-api</artifactId>
+			<version>2.1</version>
+		</dependency>
 
 
 
-<dependency>
-    <groupId>com.fasterxml.jackson.core</groupId>
-    <artifactId>jackson-core</artifactId>
-    <version>2.9.1</version>
-</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+			<version>2.9.1</version>
+		</dependency>
 
 
 		<dependency>
@@ -99,13 +99,13 @@
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-devtools -->
-<dependency>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-devtools</artifactId>
-    <version>1.5.7.RELEASE</version>
-</dependency>
-		
-		
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-devtools</artifactId>
+			<version>1.5.7.RELEASE</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>
@@ -114,50 +114,65 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
-			
-			
 
 
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-war-plugin</artifactId>
-        <version>3.2.0</version>
-        <configuration>
-          <webappDirectory></webappDirectory>
-        </configuration>
-      </plugin>
-      
-          <plugin>
-            <groupId>com.google.code.maven-replacer-plugin</groupId>
-            <artifactId>replacer</artifactId>
-            <version>1.5.1</version><!-- already tried with 1.5.2 & 1.5.3 -->
-            <configuration>
-            
-            <!-- <file>${project.build.directory}/${project.artifactId}-${project.version}</file>-->
-            <file>${project.build.directory}/${project.artifactId}/${project.artifactId}/classes/templates/fragments/header.html</file>
-             <filesToInclude>${project.basedir}/target/classes/templates/fragments/header.html</filesToInclude>
-                             <preserveDir>true</preserveDir>
-                <outputDir>target</outputDir>
- 
-                <includes>
-                   <!--  <include>${basedir}/target/mailtools.properties</include> 
-                    <include>${basedir}/target/digishop-config.properties</include>-->
-                </includes>
 
-                <replacements>
-                    <replacement>
-                        <token>@buildNumber@</token>
-                        <value>{env.BUILD_NUMBER}</value>
-                    </replacement>
-                                        <replacement>
-                        <token>@systemName@</token>
-                        <value>{env.B_SYSTEM_NAME}</value>
-                    </replacement>
-                  
-                </replacements>
-                <regex>false</regex>
-            </configuration>
-        </plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>3.2.0</version>
+				<configuration>
+					<webappDirectory></webappDirectory>
+				</configuration>
+			</plugin>
+
+
+
+
+
+			<plugin>
+				<groupId>com.google.code.maven-replacer-plugin</groupId>
+				<artifactId>replacer</artifactId>
+				<version>1.5.1</version><!-- already tried with 1.5.2 & 1.5.3 -->
+				<configuration>
+
+					<!-- <file>${project.build.directory}/${project.artifactId}-${project.version}</file> -->
+			<!-- 		<file>${project.build.directory}/${project.artifactId}/${project.artifactId}/classes/templates/fragments/header.html</file>-->
+					<!-- <filesToInclude>${project.basedir}/Java_NewsRestApp1-0.0.1-SNAPSHOT/target/classes/templates/fragments/header.html</filesToInclude>-->
+					<filesToInclude>**/header.html</filesToInclude>
+					<preserveDir>true</preserveDir>
+					<outputDir>target</outputDir>
+
+					<includes>
+						<!-- <include>${basedir}/target/mailtools.properties</include> <include>${basedir}/target/digishop-config.properties</include> -->
+					</includes>
+
+					<replacements>
+						<replacement>
+							<token>@buildNumber@</token>
+							<value>{env.BUILD_NUMBER}</value>
+						</replacement>
+						<replacement>
+							<token>@systemName@</token>
+							<value>{env.B_SYSTEM_NAME}</value>
+						</replacement>
+
+					</replacements>
+					<regex>false</regex>
+				</configuration>
+				
+				<executions>
+
+					<execution>
+						<id>replace-in-header</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>replace</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 
 		</plugins>
 	</build>
