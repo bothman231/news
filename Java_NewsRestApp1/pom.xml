@@ -135,7 +135,10 @@
             
             <!-- <file>${project.build.directory}/${project.artifactId}-${project.version}</file>-->
             <file>${project.build.directory}/${project.artifactId}/${project.artifactId}/classes/templates/fragments/header.html</file>
-                        <!-- \Java_NewsRestApp1\Java_NewsRestApp1\target\classes\templates\fragments-->
+             <filesToInclude>${project.basedir}/target/classes/templates/fragments/header.html</filesToInclude>
+                             <preserveDir>true</preserveDir>
+                <outputDir>target</outputDir>
+ 
                 <includes>
                    <!--  <include>${basedir}/target/mailtools.properties</include> 
                     <include>${basedir}/target/digishop-config.properties</include>-->
@@ -145,6 +148,10 @@
                     <replacement>
                         <token>@buildNumber@</token>
                         <value>{env.BUILD_NUMBER}</value>
+                    </replacement>
+                                        <replacement>
+                        <token>@systemName@</token>
+                        <value>{env.B_SYSTEM_NAME}</value>
                     </replacement>
                   
                 </replacements>
