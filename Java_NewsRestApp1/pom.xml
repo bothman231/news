@@ -134,18 +134,13 @@
 			<plugin>
 				<groupId>com.google.code.maven-replacer-plugin</groupId>
 				<artifactId>replacer</artifactId>
-				<version>1.5.1</version><!-- already tried with 1.5.2 & 1.5.3 -->
+				<version>1.5.1</version>
 				<configuration>
-
-					<!-- <file>${project.build.directory}/${project.artifactId}-${project.version}</file> -->
-			<!-- 		<file>${project.build.directory}/${project.artifactId}/${project.artifactId}/classes/templates/fragments/header.html</file>-->
-					<!-- <filesToInclude>${project.basedir}/Java_NewsRestApp1-0.0.1-SNAPSHOT/target/classes/templates/fragments/header.html</filesToInclude>-->
-					<filesToInclude>**/header.html</filesToInclude>
-					<preserveDir>true</preserveDir>
-					<outputDir>target</outputDir>
+					<filesToInclude>/target/**/header.html</filesToInclude>
+				<!-- 	<preserveDir>true</preserveDir>
+					<outputDir>${project.basedir}/target</outputDir>-->
 
 					<includes>
-						<!-- <include>${basedir}/target/mailtools.properties</include> <include>${basedir}/target/digishop-config.properties</include> -->
 					</includes>
 
 					<replacements>
@@ -165,10 +160,10 @@
 				<executions>
 
 					<execution>
-						<id>replace-in-header</id>
-						<phase>prepare-package</phase>
+						<id>replace-in-header</id> <!-- The id i gave it -->
+						<phase>prepare-package</phase> <!-- The maven phase -->
 						<goals>
-							<goal>replace</goal>
+							<goal>replace</goal>  <!-- The goal -->
 						</goals>
 					</execution>
 				</executions>
