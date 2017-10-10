@@ -130,7 +130,7 @@
 
 
 
-
+<!-- Replaces @buildNumber@ (Add others listed with env vars from Jenkins build time)  in header.html or any file listed -->
 			<plugin>
 				<groupId>com.google.code.maven-replacer-plugin</groupId>
 				<artifactId>replacer</artifactId>
@@ -152,6 +152,11 @@
 							<token>@systemName@</token>
 							<value>${env.B_SYSTEM_NAME}</value>
 						</replacement>
+												<replacement>
+							<token>@myCustomVar@</token>
+							<value>${env.MY_CUSTOM_VAR}</value>
+						</replacement>
+						
 
 					</replacements>
 					<regex>false</regex>
