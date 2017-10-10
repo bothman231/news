@@ -114,6 +114,44 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			
+			
+
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-war-plugin</artifactId>
+        <version>3.2.0</version>
+        <configuration>
+          <webappDirectory></webappDirectory>
+        </configuration>
+      </plugin>
+      
+          <plugin>
+            <groupId>com.google.code.maven-replacer-plugin</groupId>
+            <artifactId>replacer</artifactId>
+            <version>1.5.1</version><!-- already tried with 1.5.2 & 1.5.3 -->
+            <configuration>
+            
+            <!-- <file>${project.build.directory}/${project.artifactId}-${project.version}</file>-->
+            <file>${project.build.directory}/${project.artifactId}/${project.artifactId}/classes/templates/fragments/header.html</file>
+                        <!-- \Java_NewsRestApp1\Java_NewsRestApp1\target\classes\templates\fragments-->
+                <includes>
+                   <!--  <include>${basedir}/target/mailtools.properties</include> 
+                    <include>${basedir}/target/digishop-config.properties</include>-->
+                </includes>
+
+                <replacements>
+                    <replacement>
+                        <token>@buildNumber@</token>
+                        <value>{env.BUILD_NUMBER}</value>
+                    </replacement>
+                  
+                </replacements>
+                <regex>false</regex>
+            </configuration>
+        </plugin>
+
 		</plugins>
 	</build>
 
