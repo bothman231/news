@@ -146,11 +146,11 @@
 					<replacements>
 						<replacement>
 							<token>@buildNumber@</token>
-							<value>{env.BUILD_NUMBER}</value>
+							<value>${env.BUILD_NUMBER}</value>
 						</replacement>
 						<replacement>
 							<token>@systemName@</token>
-							<value>{env.B_SYSTEM_NAME}</value>
+							<value>${env.B_SYSTEM_NAME}</value>
 						</replacement>
 
 					</replacements>
