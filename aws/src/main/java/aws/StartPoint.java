@@ -196,6 +196,8 @@ String mName="glacierUpload";
 			
 			UploadResult result = atm.upload(vaultName, "my archive " + (new Date()), file);
 			
+	
+			
 			System.out.println("Archive ID: " + result.getArchiveId());
 		
 
