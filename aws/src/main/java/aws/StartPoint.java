@@ -1,14 +1,19 @@
 package aws;
 
+import java.io.File;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Configuration;
-
+import com.amazonaws.services.glacier.AmazonGlacier;
+import com.amazonaws.services.glacier.AmazonGlacierClient;
+import com.amazonaws.services.glacier.transfer.ArchiveTransferManager;
+import com.amazonaws.services.glacier.transfer.ArchiveTransferManagerBuilder;
+import com.amazonaws.services.glacier.transfer.UploadResult;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.Bucket;
@@ -31,11 +36,12 @@ public class StartPoint {
 	public static Logger log = LoggerFactory.getLogger(StartPoint.class);
 
 	public static void main(String[] args) {
-		//s3();
-		//sns();
-		sqsSend();
+		// s3();
+		// sns();
+		// sqsSend();
 		sqsReceive();
-		//snsTextToPhone();
+		// snsTextToPhone();
+		glacierUpload();
 	}
 
 	public static void s3() {
@@ -71,7 +77,7 @@ public class StartPoint {
 		// This 1 topic can have many subscriptions
 		// sbotham1968@gmail.com
 		// 231saleln@gmail.com
-		
+
 		String topicArn = "arn:aws:sns:us-east-1:964321415537:231saleln";
 
 		// publish to an SNS topic
@@ -85,95 +91,117 @@ public class StartPoint {
 			log.debug(mName + " Ends");
 		}
 	}
-	
-	
+
 	public static void sqsReceive() {
 		String mName = "sqsReceive";
 		if (log.isDebugEnabled()) {
 			log.debug(mName + " Starts");
 		}
 
-
 		AmazonSQS sqs = AmazonSQSClient.builder().withRegion(region).build();
 
-		String queueUrl="https://sqs.us-east-1.amazonaws.com/964321415537/saleln.fifo";
+		String queueUrl = "https://sqs.us-east-1.amazonaws.com/964321415537/saleln.fifo";
 
-	
-		ReceiveMessageRequest receiveMessageRequest = new ReceiveMessageRequest()
-				 .withMaxNumberOfMessages(10)
-				 .withQueueUrl(queueUrl);
-		
+		ReceiveMessageRequest receiveMessageRequest = new ReceiveMessageRequest().withMaxNumberOfMessages(10)
+				.withQueueUrl(queueUrl);
+
 		List<Message> messages = sqs.receiveMessage(receiveMessageRequest).getMessages();
-		
+
 		if (log.isDebugEnabled()) {
-			log.debug(mName+" items in queue="+messages.size());
+			log.debug(mName + " items in queue=" + messages.size());
 		}
-		
-		boolean deleteMessages=true;
-		deleteMessages=false;
-		
-		int x=0;
+
+		boolean deleteMessages = true;
+		deleteMessages = false;
+
+		int x = 0;
 		for (Message m : messages) {
 			x++;
-			log.debug(mName+" x="+x+" message="+m.toString());
-		    if (deleteMessages) {
-		    	sqs.deleteMessage(queueUrl, m.getReceiptHandle());
-		    }
+			log.debug(mName + " x=" + x + " message=" + m.toString());
+			if (deleteMessages) {
+				sqs.deleteMessage(queueUrl, m.getReceiptHandle());
+			}
 		}
-		
+
 		if (log.isDebugEnabled()) {
 			log.debug(mName + " Ends");
 		}
 	}
-	
+
 	public static void sqsSend() {
 		String mName = "sqsSend";
 		if (log.isDebugEnabled()) {
 			log.debug(mName + " Starts");
 		}
 
-
 		AmazonSQS sqs = AmazonSQSClient.builder().withRegion(region).build();
 
-		String queueUrl="https://sqs.us-east-1.amazonaws.com/964321415537/saleln.fifo";
-		//sqs.
-		//List<Message> messages = sqs.receiveMessage(queueUrl).getMessages();
-	
-		SendMessageRequest s = new SendMessageRequest()
-				.withMessageBody("hello world")
-				.withMessageDeduplicationId(String.valueOf(System.currentTimeMillis()))
-				.withMessageGroupId("1")
-				 .withQueueUrl(queueUrl);
-		
+		String queueUrl = "https://sqs.us-east-1.amazonaws.com/964321415537/saleln.fifo";
+		// sqs.
+		// List<Message> messages = sqs.receiveMessage(queueUrl).getMessages();
+
+		SendMessageRequest s = new SendMessageRequest().withMessageBody("hello world")
+				.withMessageDeduplicationId(String.valueOf(System.currentTimeMillis())).withMessageGroupId("1")
+				.withQueueUrl(queueUrl);
+
 		sqs.sendMessage(s);
-		
-		
-		
+
 		if (log.isDebugEnabled()) {
 			log.debug(mName + " Ends");
 		}
 	}
-	
-	
-public static void snsTextToPhone() {
-	
-	AmazonSNS sns = AmazonSNSClient.builder().withRegion(region).build();
 
+	public static void snsTextToPhone() {
 
-	    String message = "My SMS message";
-	    String phoneNumber = "+18133752493";
-	    Map<String, MessageAttributeValue> smsAttributes = 
-	            new HashMap<String, MessageAttributeValue>();
-	    //<set SMS attributes>
-	    sendSMSMessage(sns, message, phoneNumber, smsAttributes);
+		AmazonSNS sns = AmazonSNSClient.builder().withRegion(region).build();
+
+		String message = "My SMS message";
+		String phoneNumber = "+18133752493";
+		Map<String, MessageAttributeValue> smsAttributes = new HashMap<String, MessageAttributeValue>();
+		// <set SMS attributes>
+		sendSMSMessage(sns, message, phoneNumber, smsAttributes);
 	}
 
-	public static void sendSMSMessage(AmazonSNS snsClient, String message, 
-	    String phoneNumber, Map<String, MessageAttributeValue> smsAttributes) {
-	    PublishResult result = snsClient.publish(new PublishRequest()
-	                    .withMessage(message)
-	                    .withPhoneNumber(phoneNumber)
-	                    .withMessageAttributes(smsAttributes));
-	    System.out.println(result); // Prints the message ID.
+	public static void sendSMSMessage(AmazonSNS snsClient, String message, String phoneNumber,
+			Map<String, MessageAttributeValue> smsAttributes) {
+		PublishResult result = snsClient.publish(new PublishRequest().withMessage(message).withPhoneNumber(phoneNumber)
+				.withMessageAttributes(smsAttributes));
+		System.out.println(result); // Prints the message ID.
+	}
+
+	public static void glacierUpload() {
+String mName="glacierUpload";
+
+//String vaultArn="arn:aws:glacier:us-east-1:964321415537:vaults/news";
+
+		String archiveToUpload = "\\tmp\\2.pdf";
+		File file = new File(archiveToUpload);
+		if (file.exists()) {
+			log.debug(mName+" Ok to upload");
+		} else {
+			log.debug(mName+" No file");
+			return;
+		}
+		
+		
+		AmazonGlacier g = AmazonGlacierClient.builder().withRegion(region).build();
+
+		String vaultName = "news";
+
+		try {
+			ArchiveTransferManagerBuilder b = new ArchiveTransferManagerBuilder().withGlacierClient(g);
+
+			ArchiveTransferManager atm = b.build();
+
+			
+			UploadResult result = atm.upload(vaultName, "my archive " + (new Date()), file);
+			
+			System.out.println("Archive ID: " + result.getArchiveId());
+		
+
+		} catch (Exception e) {
+			log.error(mName+" "+e.getCause().getMessage());
+			System.err.println(e);
+		}
 	}
 }
