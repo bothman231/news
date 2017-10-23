@@ -1,0 +1,18 @@
+This is a real simple example of a spring boot executable .war.
+You can take the generated .war (as created by maven install) and
+drop it on any machine running java
+then execute with java -jar Java_Scheduler-0.0.1-SNAPSHOT.war
+and it will run and loop based on the schedule set in the code.
+
+You can use this as a heart beat from a remote system.
+
+set env vars
+B_CONFIG_ROOT=c:\unique
+B_SYSTEM_NAME=hudzen10
+
+Also create a config.properties file at c:\{B_CONFIG_ROOT}\JAVA_CONF\${INSTANCE} with at least a node 
+entry in it 
+i.e.
+node=01
+
+java -jar -Dinstance=A js.war
