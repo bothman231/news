@@ -64,6 +64,7 @@ public class StartPoint {
 		}
 	}
 
+	
 	public static void sns() {
 		String mName = "sns";
 		if (log.isDebugEnabled()) {
