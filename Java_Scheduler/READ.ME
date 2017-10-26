@@ -16,3 +16,16 @@ i.e.
 node=01
 
 java -jar -Dinstance=A js.war
+
+# run passing local env file with name value pairs.
+
+docker run -it --env-file my.env java_scheduler:1
+
+
+
+building in docker
+docker build -t java_scheduler:1 .
+
+
+running in docker
+docker run java_scheduler:1
