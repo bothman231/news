@@ -5,13 +5,18 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 import java.util.Properties;
+
+import javax.annotation.PostConstruct;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.scheduling.annotation.Schedules;
 import org.springframework.stereotype.Component;
 
 // Very simple spring boot scheduler app,
@@ -27,6 +32,8 @@ public class ScheduledTasks {
     //@Scheduled(fixedRate = 300000)  // 5 mins
     @Scheduled(fixedRate = 30000)  // 30 seconds
     public void reportCurrentTime() throws Exception {
+    	
+    	
         String mName="reportCurrentTime";
         
         String systemName=System.getenv("B_SYSTEM_NAME");
@@ -58,7 +65,7 @@ public class ScheduledTasks {
         }
         
 
-        log.info("The time is now {}", dateFormat.format(new Date())+" "+systemName+" instance="+instance+" node="+node);
+        log.info(mName+" The time is now {}", dateFormat.format(new Date())+" "+systemName+" instance="+instance+" node="+node);
         
     }
     
@@ -115,5 +122,38 @@ public class ScheduledTasks {
     		}
             return prop;
     	}
-    
+    	
+    	// Use reflection to get an Annotation and one of its values
+    	public void getAnValue() {
+    		
+    	String mName="getAnValue";
+    	log.info(mName+" Starts");
+// This class    	
+    	Method[] methods = ScheduledTasks.class.getMethods();
+// All of its methods    	
+    	for (Method m : methods)
+    	{
+    	   log.info(mName+" "+m.getName());
+    	
+    	        if (m.isAnnotationPresent(Scheduled.class))
+    	    {
+    	        	log.info(mName+" present "+m.getAnnotation(Scheduled.class).toString());
+    	        	Scheduled ta = m.getAnnotation(Scheduled.class);
+    	        	log.info(mName+" fixedRate set to "+ta.fixedRate());
+    	        System.out.println(ta.toString());
+    	    }
+    	}
+    	}
+    	
+        @Scheduled(fixedRateString = "${schedTime}" )  // 20 seconds"
+        public void anotherTime() throws Exception {
+            log.info("The time is now {}", dateFormat.format(new Date()));
+            //anotherTime.
+        }
+    	
+    	@PostConstruct
+    	public void postContruct() {
+    		getAnValue();
+    	}
+    	
 }
