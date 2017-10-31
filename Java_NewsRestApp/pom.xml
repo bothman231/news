@@ -136,7 +136,11 @@
 			<version>${springBootStarterJpaVersion}</version>
 		</dependency>
 		
-		
+				<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-rest</artifactId>
+			         <version>${springBootStarterAopVersion}</version>
+		</dependency>
 		
 
 	</dependencies>

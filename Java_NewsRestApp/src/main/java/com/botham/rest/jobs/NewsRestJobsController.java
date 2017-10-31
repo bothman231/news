@@ -23,6 +23,7 @@ import com.botham.news.domain.Db;
 import com.botham.news.domain.customer.Customer;
 import com.botham.news.domain.jobs.Jobs;
 
+
 @RestController
 @ContextConfiguration(classes = { JobsConfig.class, CustomerConfig.class })
 @SpringBootApplication
@@ -216,6 +217,21 @@ public class NewsRestJobsController {
 	  
 
    }
+   
+   @Consumes({ "*", "application/xml", "application/json", "text/plain,text/html" })
+	@Produces({ "application/xml", "application/json", "text/plain,text/html" })
+	@RequestMapping("/api/checkin")
+	@ResponseBody
+	public ResponseEntity<String> checkIn() {
+		String mName="checkIn";
+		
+		if (log.isDebugEnabled()) {
+			log.debug(mName+" "+"Starts");
+
+		}
+		String message="ok";
+		return new ResponseEntity(message, HttpStatus.OK);
+	}
 
    
 }

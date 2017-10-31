@@ -12,12 +12,18 @@ import java.util.Map;
 import java.util.Properties;
 
 import javax.annotation.PostConstruct;
+import javax.swing.filechooser.FileSystemView;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.scheduling.annotation.Schedules;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.RestTemplate;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 // Very simple spring boot scheduler app,
 // Runs every 5000 ms (5 secs).
@@ -64,7 +70,19 @@ public class ScheduledTasks {
             node=prop.getProperty("node");            
         }
         
+		
+//Gather all system info.
+		// 1 - Load the info.json from the CONFIG_ROOT
 
+		Info info = new Info("fncserver3", "A", "c:\\unique");
+		
+		//infoJsonToPojo();
+		infoPojoToJson(info);
+		
+		info=getRoots(systemName, instance, configRoot);
+		infoPojoToJson(info);
+
+		checkIn(info);
         log.info(mName+" The time is now {}", dateFormat.format(new Date())+" "+systemName+" instance="+instance+" node="+node);
         
     }
@@ -74,6 +92,9 @@ public class ScheduledTasks {
     	String result = "";
     	InputStream inputStream;
      
+    	
+    	
+    	
     	public Properties getPropValues(String configRoot, String instance) throws IOException, Exception {
     		String mName="getPropValues";
 			Properties prop = new Properties();
@@ -101,6 +122,9 @@ public class ScheduledTasks {
     			}
      
     			Date time = new Date(System.currentTimeMillis());
+    			
+    			
+
      
 // Get the property value and print it out
     			//String node = prop.getProperty("node");
@@ -123,37 +147,107 @@ public class ScheduledTasks {
             return prop;
     	}
     	
-    	// Use reflection to get an Annotation and one of its values
-    	public void getAnValue() {
-    		
-    	String mName="getAnValue";
-    	log.info(mName+" Starts");
-// This class    	
-    	Method[] methods = ScheduledTasks.class.getMethods();
-// All of its methods    	
-    	for (Method m : methods)
-    	{
-    	   log.info(mName+" "+m.getName());
+	// Use reflection to get an Annotation and one of its values
+	public void getAnValue() {
+		boolean debug=false;
+		
+		String mName = "getAnValue";
+		log.info(mName + " Starts");
+		// This class
+		Method[] methods = ScheduledTasks.class.getMethods();
+		// All of its methods
+		for (Method m : methods) {
+			//log.info(mName + " " + m.getName());
+
+			if (m.isAnnotationPresent(Scheduled.class)) {
+				//log.info(mName + " present " + m.getAnnotation(Scheduled.class).toString());
+				Scheduled ta = m.getAnnotation(Scheduled.class);
+				//log.info(mName + " fixedRate set to " + ta.fixedRate());
+				//System.out.println(ta.toString());
+			}
+		}
+	}
     	
-    	        if (m.isAnnotationPresent(Scheduled.class))
-    	    {
-    	        	log.info(mName+" present "+m.getAnnotation(Scheduled.class).toString());
-    	        	Scheduled ta = m.getAnnotation(Scheduled.class);
-    	        	log.info(mName+" fixedRate set to "+ta.fixedRate());
-    	        System.out.println(ta.toString());
-    	    }
-    	}
-    	}
+    	
+    	
     	
         @Scheduled(fixedRateString = "${schedTime}" )  // 20 seconds"
         public void anotherTime() throws Exception {
             log.info("The time is now {}", dateFormat.format(new Date()));
             //anotherTime.
         }
+        
+        
+        public static void infoJsonToPojo() throws JsonParseException, JsonMappingException, IOException {			
+			ObjectMapper mapper = new ObjectMapper();
+			Info info = mapper.readValue(new File("c:\\tmp\\info.json"), Info.class);
+        }
+        
+        public static void infoPojoToJson(Info info) throws JsonParseException, JsonMappingException, IOException {
+        	String mName="infoPojoToJson";
+        	ObjectMapper mapper = new ObjectMapper();
+        	try {
+        	   String json = mapper.writeValueAsString(info);
+        	   mapper.writeValue(new File("c:\\tmp\\info.json"), info);
+        	   log.info(mName+" "+json);
+        	} catch (Exception e) {
+        	   log.error(e.getMessage());
+        	}
+        	
+        }
     	
     	@PostConstruct
     	public void postContruct() {
     		getAnValue();
     	}
+    	
+    	public static Info getRoots(String systemName, String instance, String configRoot) {
+    		
+    		Info info = new Info(systemName, instance, configRoot);
+    		
+    		String mName="getRoots";
+    		FileSystemView fileSystemView = FileSystemView.getFileSystemView();
+    		/*
+    		File[] roots = fileSystemView.getRoots();
+    		for (int i=0; i<roots.length; i++) {
+    			log.info(mName+" "+roots[i]);
+    		}
+    		*/
+    		File[] f = File.listRoots();
+    		for (int i=0; i<f.length; i++) {
+    			log.info(mName+" "+f[i]+" "+fileSystemView.getSystemDisplayName(f[i])+
+    					                   " "+f[i].getPath()+" "+f[i].getName()+
+    					                " "+toGb(f[i].getTotalSpace())+
+    					                " "+toGb(f[i].getUsableSpace()));
+    			Storage s = new Storage(f[i].getPath(), f[i].getName(), fileSystemView.getSystemDisplayName(f[i]));
+    			info.getStorageList().add(s);
+    		}
+    		
+            return info;
+    		
+    	}
+    	
+    	public static long toGb(long value) {
+    		return value / 1024 / 1024 / 1024;
+    	}
+    	
+    	
+    	public void checkIn(Info info) { 
+    		String mName="CheckIn";
+    		
+    	   String checkInUrl="http://localhost:8097/api/checkin";
+    	   
+    	   RestTemplate restTemplate = new RestTemplate();
+
+    	   
+           String s = restTemplate.getForObject(checkInUrl, String.class);
+           log.info(mName+" s="+s);
+           
+           
+    	    
+    	   
+    	}
+    	
+
     	
 }

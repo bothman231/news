@@ -214,6 +214,21 @@ import com.botham.news.rest.Thing;
 	}
 	
 	
+	@Consumes({ "*", "application/xml", "application/json", "text/plain,text/html" })
+	@Produces({ "application/xml", "application/json", "text/plain,text/html" })
+	@RequestMapping("/api/checkin")
+	@ResponseBody
+	public ResponseEntity<String> checkIn() {
+		String mName="checkIn";
+		
+		if (log.isDebugEnabled()) {
+			log.debug(mName+" "+"Starts");
+
+		}
+		String message="ok";
+		return new ResponseEntity(message, HttpStatus.OK);
+	}
+	
 	public void getLocalIp() {
 		InetAddress addr=null;
 		try {
