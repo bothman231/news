@@ -1,4 +1,4 @@
-package com.botham;
+package com.botham.domain.resource;
 
 public class Storage {
    public Storage() {

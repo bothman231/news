@@ -60,6 +60,31 @@
     <version>2.9.2</version>
 </dependency>
 		
+				<dependency>
+			<groupId>javax.ws.rs</groupId>
+			<artifactId>javax.ws.rs-api</artifactId>
+			<version>2.1</version>
+		</dependency>
+		
+		
+						<dependency>
+			<groupId>com.botham.domain</groupId>
+			<artifactId>Java_BothamDomain</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		
+								<dependency>
+			<groupId>com.botham.repo</groupId>
+			<artifactId>Java_BothamRepo</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		
+				<dependency>
+			<groupId>com.microsoft.sqlserver</groupId>
+			<artifactId>sqljdbc4</artifactId>
+			<version>4.0</version>
+		</dependency>
+		
     </dependencies>
 
     <build>

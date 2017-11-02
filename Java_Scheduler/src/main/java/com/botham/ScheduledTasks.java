@@ -16,11 +16,16 @@ import javax.swing.filechooser.FileSystemView;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.scheduling.annotation.Schedules;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import com.botham.domain.resource.Info;
+import com.botham.domain.resource.Storage;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -235,13 +240,23 @@ public class ScheduledTasks {
     	public void checkIn(Info info) { 
     		String mName="CheckIn";
     		
-    	   String checkInUrl="http://localhost:8097/api/checkin";
+    	   String checkInUrl="http://localhost:8073/api/checkin";
     	   
     	   RestTemplate restTemplate = new RestTemplate();
 
-    	   
-           String s = restTemplate.getForObject(checkInUrl, String.class);
-           log.info(mName+" s="+s);
+    	   try {
+    		   
+    	      HttpEntity<Info> request = new HttpEntity<>(info);
+    		  ResponseEntity<Info> response = restTemplate.exchange(checkInUrl, HttpMethod.POST, request, Info.class);
+              //String s = restTemplate.getForObject(checkInUrl, String.class);
+    		  
+    		  
+              
+              log.info(mName+" reponse="+response.getBody()+" "+response.getStatusCode());
+              
+    	   } catch (Exception e) {
+    		  log.error(mName+" "+e.getMessage());
+    	   }
            
            
     	    

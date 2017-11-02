@@ -1,4 +1,4 @@
-package com.botham;
+package com.botham.domain.resource;
 
 import java.util.ArrayList;
 import java.util.List;
