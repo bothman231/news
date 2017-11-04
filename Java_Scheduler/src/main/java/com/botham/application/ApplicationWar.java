@@ -13,17 +13,19 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableScheduling
-@ComponentScan(basePackages = {"com.botham"})
+@ComponentScan({"com.botham.*"})
 public class ApplicationWar extends SpringBootServletInitializer {
 
     private static final Logger log = LoggerFactory.getLogger(ApplicationWar.class);
     
     @Override
     protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+    	
     	String mName="ApplicationWar";
     	if (log.isDebugEnabled()) {
     		log.debug(mName+" Starts");
     	}
+    	
         return application.sources(ApplicationWar.class);
     }
     

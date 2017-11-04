@@ -1,7 +1,10 @@
 package com.botham.domain.resource;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.persistence.Column;
 
 public class Info {
    public Info() {
@@ -10,15 +13,24 @@ public class Info {
    
 @Override
 public String toString() {
-	return "Info [systemName=" + systemName + ", instance=" + instance + ", configRoot=" + configRoot + "]";
+	return "Info [systemName=" + systemName + ", instance=" + instance + ", configRoot=" + configRoot + 
+			      ", javaVersion="+javaVersion+", build="+build+
+			      ", localTime="+localTime+
+			      
+			      "]";
 }
 
-public Info(String systemName, String instance, String configRoot) {
+public Info(String systemName, String instance, String configRoot, 
+		    String javaVersion, String build, Timestamp localTime) {
 	super();
 	this.systemName = systemName;
 	this.instance = instance;
 	this.configRoot = configRoot;
 	this.storageList=new ArrayList<Storage>();
+	this.javaVersion=javaVersion;
+	this.build=build;
+	this.localTime=localTime;
+	
 }
 
 private String systemName;
@@ -51,6 +63,35 @@ public List<Storage> getStorageList() {
 public void setStorageList(List<Storage> storageList) {
 	this.storageList = storageList;
 } 
+
+private String javaVersion;
+public String getJavaVersion() {
+	return javaVersion;
+}
+
+public void setJavaVersion(String javaVersion) {
+	this.javaVersion = javaVersion;
+}
+
+private String build;
+public String getBuild() {
+	return build;
+}
+
+public void setBuild(String build) {
+	this.build = build;
+}
+
+
+public Timestamp getLocalTime() {
+	return localTime;
+}
+
+public void setLocalTime(Timestamp localTime) {
+	this.localTime = localTime;
+}
+
+private Timestamp localTime;
 
    
 }

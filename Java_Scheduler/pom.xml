@@ -93,6 +93,86 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
+            
+            
+            
+                 <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>build-helper-maven-plugin</artifactId>
+            <version>3.0.0</version>
+            <executions>
+                <execution>
+                    <id>timestamp-property</id>
+                    <goals>
+                        <goal>timestamp-property</goal>
+                    </goals>
+                    <configuration>
+                        <name>build.time</name>
+                        <pattern>MM/dd/yyyy hh:mm.ss-SSS aa</pattern>
+                        <locale>en_US</locale>
+                        <timeZone>GMT-4</timeZone>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+        
+        
+         
+            
+            
+            	<plugin>
+				<groupId>com.google.code.maven-replacer-plugin</groupId>
+				<artifactId>replacer</artifactId>
+				<version>1.5.1</version>
+				<configuration>
+					<filesToInclude>/target/**/header.html</filesToInclude>
+					<filesToInclude>/target/**/info.txt</filesToInclude>
+				<!-- 	<preserveDir>true</preserveDir>
+					<outputDir>${project.basedir}/target</outputDir>-->
+
+					<includes>
+					</includes>
+
+					<replacements>
+						<replacement>
+							<token>@buildNumber@</token>
+							<value>${env.BUILD_NUMBER}</value>
+						</replacement>
+						<replacement>
+							<token>@systemName@</token>
+							<value>${env.B_SYSTEM_NAME}</value>
+						</replacement>
+												<replacement>
+							<token>@myCustomVar@</token>
+							<value>${env.MY_CUSTOM_VAR}</value>
+						</replacement>
+						
+								<replacement>
+						<token>@dateAndTime@</token>
+							<value>${build.time}</value>
+						</replacement>
+						
+
+					</replacements>
+					<regex>false</regex>
+				</configuration>
+				
+				<executions>
+
+					<execution>
+						<id>replace-in-header</id> <!-- The id i gave it -->
+						<phase>prepare-package</phase> <!-- The maven phase -->
+						<goals>
+							<goal>replace</goal>  <!-- The goal -->
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			
+			
+			
+			
+			
         </plugins>
     </build>
 

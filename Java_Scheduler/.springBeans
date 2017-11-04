@@ -7,7 +7,6 @@
 	</configSuffixes>
 	<enableImports><![CDATA[false]]></enableImports>
 	<configs>
-		<config>java:com.botham.application.Application</config>
 		<config>java:com.botham.application.ApplicationWar</config>
 		<config>java:com.botham.controllers.MyRestController</config>
 	</configs>
