@@ -1,10 +1,10 @@
-package com.botham.domain.resource;
+package com.botham.base;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.Column;
+
 
 public class Info {
    public Info() {
