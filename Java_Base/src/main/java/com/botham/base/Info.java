@@ -13,11 +13,17 @@ public class Info {
    
 @Override
 public String toString() {
-	return "Info [systemName=" + systemName + ", instance=" + instance + ", configRoot=" + configRoot + 
+	StringBuilder sb = new StringBuilder();
+	
+	sb.append("Info [systemName=" + systemName + ", instance=" + instance + ", configRoot=" + configRoot + 
 			      ", javaVersion="+javaVersion+", build="+build+
 			      ", localTime="+localTime+
 			      
-			      "]";
+			      "]");
+	
+	sb.append(geoLocation.toString());
+	return sb.toString();
+	
 }
 
 public Info(String systemName, String instance, String configRoot, 
@@ -91,7 +97,20 @@ public void setLocalTime(Timestamp localTime) {
 	this.localTime = localTime;
 }
 
+public XLocation getGeoLocation() {
+	return geoLocation;
+}
+
+public void setGeoLocation(XLocation geoLocation) {
+	this.geoLocation = geoLocation;
+}
+
 private Timestamp localTime;
 
    
+
+
+private XLocation geoLocation;
+
 }
+

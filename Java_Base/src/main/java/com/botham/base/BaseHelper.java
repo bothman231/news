@@ -1,19 +1,26 @@
 package com.botham.base;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Map;
 import java.util.Properties;
-
 import javax.swing.filechooser.FileSystemView;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class BaseHelper {
 	
@@ -134,5 +141,83 @@ return info;
 	
 	public static long toGb(long value) {
 		return value / 1024 / 1024 / 1024;
+	}
+	
+	
+	public static String getIp() {
+		String mName = "getIp";
+
+		BufferedReader in = null;
+		URL whatismyip = null;
+
+		try {
+			whatismyip = new URL("http://checkip.amazonaws.com");
+
+			in = new BufferedReader(new InputStreamReader(whatismyip.openStream()));
+			String ip = in.readLine();
+			return ip;
+
+		} catch (Exception e) {
+			if (log.isErrorEnabled()) {
+				log.error(mName + " Could not get IP from WS "+whatismyip.toString());
+			}
+			e.printStackTrace();
+			return "";
+
+		} finally {
+			if (in != null) {
+				try {
+					in.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	
+	
+	public static XLocation ipToGeo(String ip) {
+		String mName="ipToGeo";
+		RestTemplate restTemplate = new RestTemplate();
+
+		//String ip = "82.16.111.250";
+		//ip = "";
+		//ip = IpChecker.getIp();
+
+		String fooResourceUrl = "https://ipinfo.io/" + ip + "/json";
+
+		HttpHeaders httpHeaders = new HttpHeaders();
+		httpHeaders.add("Accept", "application/json");
+		ResponseEntity<String> response = restTemplate.getForEntity(fooResourceUrl + "", String.class);
+
+		if (log.isDebugEnabled()) {
+		   log.debug(mName+" "+response.toString());
+		}
+
+		ObjectMapper mapper = new ObjectMapper();
+		JsonNode root;
+		try {
+			root = mapper.readTree(response.getBody());
+			JsonNode region = root.path("region");
+			if (log.isDebugEnabled()) {
+			   log.debug(mName+" Region=" + region);
+			}
+
+		} catch (JsonProcessingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		// assertThat(response.getStatusCode(), equals(HttpStatus.OK));
+
+		XLocation location = restTemplate.getForObject(fooResourceUrl + "", XLocation.class);
+
+		if (log.isDebugEnabled()) {
+		   log.debug(mName+" "+location.toString());
+		}
+		
+		return location;
+
 	}
 }

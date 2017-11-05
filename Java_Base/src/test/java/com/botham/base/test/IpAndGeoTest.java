@@ -1,10 +1,7 @@
-package com.botham.base.test;
+package java.com.botham.base.test;
 
-
-
-
+import com.botham.base.BaseHelper;
 import com.botham.base.GlobalConstants;
-
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,14 +9,16 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.junit.Test;
 
 @RunWith(SpringRunner.class)
-public class GlobalConstantsTest {
-	Logger log = LoggerFactory.getLogger(GlobalConstantsTest.class);
+public class IpAndGeoTest {
+	Logger log = LoggerFactory.getLogger(IpAndGeoTest.class);
 
 	@Test
-	public void GlobalConstantsEchoTest() {
+	public void IpTest() {
 		if (log.isDebugEnabled()) {
 			log.debug(GlobalConstants.STARTS);
 		}
+		BaseHelper.getIp();
+		
 	}
 
 }
