@@ -97,7 +97,11 @@ public class MyRestController {
 		   if (exists!=null) {
 			   exists.setLastCheckin(timestamp);
 			   exists.setCheckinCount(exists.getCheckinCount().add(new BigDecimal("1.00")));
-			   exists.setInfo(info.getJavaVersion()+" "+info.getBuild());
+			   exists.setInfo("Java="+info.getJavaVersion()+
+					          " Build="+info.getBuild()+
+					          " Location="+info.getGeoLocation().getCity()+" "+
+					                       info.getGeoLocation().getIp());
+			   
 			   exists.setCheckinServer(thisSystemName);
 			   exists.setTimeAtRemote(info.getLocalTime());
 			   repository.save(exists);
@@ -106,7 +110,10 @@ public class MyRestController {
 			   new1.setId(info.getSystemName());
 			   new1.setLastCheckin(timestamp);
 			   new1.setCheckinCount(new BigDecimal("1.00"));
-			   new1.setInfo(info.getJavaVersion()+" "+info.getBuild());
+			   new1.setInfo("Java="+info.getJavaVersion()+
+				          " Build="+info.getBuild()+
+				          " Location="+info.getGeoLocation().getCity()+" "+
+				                       info.getGeoLocation().getIp());
 			   new1.setCheckinServer(thisSystemName);
 			   new1.setTimeAtRemote(info.getLocalTime());
 			   repository.save(new1);

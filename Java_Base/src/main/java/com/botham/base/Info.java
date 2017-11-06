@@ -21,7 +21,12 @@ public String toString() {
 			      
 			      "]");
 	
-	sb.append(geoLocation.toString());
+	if (geoLocation==null) {
+		sb.append(" geoLocation is null");
+	} else {
+	  sb.append(" "+geoLocation.toString());		
+	}
+	
 	return sb.toString();
 	
 }
@@ -36,6 +41,7 @@ public Info(String systemName, String instance, String configRoot,
 	this.javaVersion=javaVersion;
 	this.build=build;
 	this.localTime=localTime;
+	this.geoLocation=new XLocation();
 	
 }
 

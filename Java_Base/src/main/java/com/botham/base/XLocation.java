@@ -11,6 +11,16 @@ public class XLocation implements Serializable {
 
 	private static final long serialVersionUID = -3164505100189768971L;
 
+	public XLocation() {
+		this.ip="";
+		this.city="";
+		this.country="";
+		this.loc="";
+		this.org="";
+		this.postal="";
+		this.region="";
+	}
+	
 	private String ip;
 	private String city;
 
