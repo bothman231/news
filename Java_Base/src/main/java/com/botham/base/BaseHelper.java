@@ -48,9 +48,6 @@ public class BaseHelper {
 		return build;
 	}
 	
-	
-	
-	
 	public static Properties getPropValues(String configRoot, String instance) throws IOException, Exception {
 		String mName="getPropValues";
 		Properties prop = new Properties();
