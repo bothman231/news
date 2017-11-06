@@ -1,0 +1,2 @@
+DateAndTimeOfBuild=@dateAndTime@
+
