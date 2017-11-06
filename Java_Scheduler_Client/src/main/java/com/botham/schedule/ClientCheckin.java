@@ -38,6 +38,7 @@ public class ClientCheckin {
 
 	public static boolean geoObtained = false;
 	public static XLocation geoLocation = new XLocation();
+	public static Integer cycles=0;
 	
 	private final String cName="Client ";
 	
@@ -52,8 +53,9 @@ public class ClientCheckin {
 
     public void doIt() throws Exception {
     	
-    	
+        cycles++;
         String mName="doIt";
+        log.info(mName+" Starts ------------------- cycles="+cycles);
 
         String configRoot=System.getenv("B_CONFIG_ROOT");        
         log.debug(mName+" B_CONFIG_ROOT="+configRoot);
@@ -122,6 +124,8 @@ public class ClientCheckin {
 		checkIn(info);
 			
         log.info(cName+mName+" The time is now {}", dateFormat.format(currentTime)+" "+systemName+" instance="+instance+" node="+node);
+        log.info(mName+" Ends --------------------------- cycles="+cycles);
+
         
     }
     
