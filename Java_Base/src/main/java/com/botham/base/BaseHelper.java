@@ -8,8 +8,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
-import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import javax.swing.filechooser.FileSystemView;
@@ -109,32 +110,36 @@ public class BaseHelper {
         return prop;
 	}
 	
-	public static Info getRoots(String systemName, String instance, String configRoot,
-            String javaVersion, String build) {
+	public static List<Storage> getRoots() {
 
-Info info = new Info(systemName, instance, configRoot, javaVersion, build, new Timestamp(System.currentTimeMillis()));
 
-String mName="getRoots";
-FileSystemView fileSystemView = FileSystemView.getFileSystemView();
-/*
-File[] roots = fileSystemView.getRoots();
-for (int i=0; i<roots.length; i++) {
-log.info(mName+" "+roots[i]);
-}
-*/
-File[] f = File.listRoots();
-for (int i=0; i<f.length; i++) {
-log.info(mName+" "+f[i]+" "+fileSystemView.getSystemDisplayName(f[i])+
-                   " "+f[i].getPath()+" "+f[i].getName()+
-                " "+toGb(f[i].getTotalSpace())+
-                " "+toGb(f[i].getUsableSpace()));
-Storage s = new Storage(f[i].getPath(), f[i].getName(), fileSystemView.getSystemDisplayName(f[i]));
-info.getStorageList().add(s);
-}
+		String mName = "getRoots";
+		FileSystemView fileSystemView = FileSystemView.getFileSystemView();
+		/*
+		 * File[] roots = fileSystemView.getRoots(); for (int i=0; i<roots.length; i++)
+		 * { log.info(mName+" "+roots[i]); }
+		 */
+		
+		List<Storage> storageList=new ArrayList<>();
+		
+		File[] f = File.listRoots();
+		
+		for (int i = 0; i < f.length; i++) {
+			if (log.isDebugEnabled()) {
+				log.debug(mName + " " + f[i] + " " + fileSystemView.getSystemDisplayName(f[i]) + " " + f[i].getPath() + " "
+			        			+ f[i].getName() + " " + toGb(f[i].getTotalSpace()) + " " + toGb(f[i].getUsableSpace()));
+			}
+			Storage storage = new Storage(f[i].getPath(), f[i].getName(), fileSystemView.getSystemDisplayName(f[i]) 
+					                                    ,f[i].getTotalSpace(), f[i].getUsableSpace());
+			storageList.add(storage);
+		}
 
-return info;
+		if (log.isDebugEnabled()) {
+			log.debug(mName+" returning "+storageList.size());
+		}
+		return storageList;
 
-}
+	}
 	
 	public static long toGb(long value) {
 		return value / 1024 / 1024 / 1024;
