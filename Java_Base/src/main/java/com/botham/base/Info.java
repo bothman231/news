@@ -27,6 +27,16 @@ public String toString() {
 	  sb.append(" "+geoLocation.toString());		
 	}
 	
+	if (storageList==null) {
+		sb.append(" storageList is null");
+	} else {
+      int x=0;
+	  for (Storage s : storageList) {
+		  x++;
+		  sb.append(s.toString());		
+	  }
+	}
+	
 	return sb.toString();
 	
 }
@@ -37,11 +47,14 @@ public Info(String systemName, String instance, String configRoot,
 	this.systemName = systemName;
 	this.instance = instance;
 	this.configRoot = configRoot;
+	
 	this.storageList=new ArrayList<Storage>();
+	
 	this.javaVersion=javaVersion;
 	this.build=build;
 	this.localTime=localTime;
 	this.geoLocation=new XLocation();
+
 	
 }
 
@@ -68,6 +81,7 @@ public void setConfigRoot(String configRoot) {
 private String instance;
 private String configRoot;
 private List<Storage> storageList;
+
 public List<Storage> getStorageList() {
 	return storageList;
 }

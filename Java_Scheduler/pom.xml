@@ -85,6 +85,12 @@
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		
+										<dependency>
+			<groupId>com.botham.aws</groupId>
+			<artifactId>aws</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		
 				<dependency>
 			<groupId>com.microsoft.sqlserver</groupId>
 			<artifactId>sqljdbc4</artifactId>
@@ -105,7 +111,7 @@
                  <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>build-helper-maven-plugin</artifactId>
-            <version>3.0.0</version>
+  <version>3.0.0</version>
             <executions>
                 <execution>
                     <id>timestamp-property</id>

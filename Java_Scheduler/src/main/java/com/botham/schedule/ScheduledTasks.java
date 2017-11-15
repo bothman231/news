@@ -22,7 +22,7 @@ public class ScheduledTasks {
 	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
 	// @Scheduled(fixedRate = 300000) // 5 mins
-	@Scheduled(fixedRate = 30000) // 30 seconds
+	@Scheduled(fixedRate = 300000) // 30 seconds
 	public void reportCurrentTime() throws Exception {
 
 		String mName = "reportCurrentTime";
@@ -34,7 +34,8 @@ public class ScheduledTasks {
 	String result = "";
 	InputStream inputStream;
 
-	@Scheduled(fixedRateString = "${schedTime}") // 20 seconds"
+	
+	//@Scheduled(fixedRateString = "${schedTime}") // 20 seconds"
 	public void anotherTime() throws Exception {
 		log.info("The time is now {}", dateFormat.format(new Date()));
 		// anotherTime.

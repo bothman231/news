@@ -50,6 +50,8 @@ public class ClientCheckin {
     
     public static String systemName;
     
+    public static boolean includeStorage=true;
+    
 
     public void doIt() throws Exception {
     	
@@ -111,6 +113,13 @@ public class ClientCheckin {
 
 		//Info info = new Info("fncserver3", "A", "c:\\unique");
 		Info info = new Info(systemName, instance, configRoot, javaVersion, build, new Timestamp(System.currentTimeMillis()));
+		
+		if (includeStorage) {
+		   info.setStorageList(BaseHelper.getRoots());
+		}
+		
+		log.info(mName+" info="+info.toString());
+		
 		info.setGeoLocation(geoLocation);
 		
 		//infoJsonToPojo();
@@ -225,7 +234,7 @@ public class ClientCheckin {
     		   
     		   //info.getStorageList().add(new Storage("a", "b", "c"));
     		   
-    		  String jsonStr=infoPojoToJson(info);
+    		  //String jsonStr=infoPojoToJson(info);
     		  
     		  
     		  
@@ -244,7 +253,7 @@ public class ClientCheckin {
     		  
     		  //HttpEntity<Info> entity = new HttpEntity<Info>(jsonStr, addRestHeaders());
     		  
-    		  log.info("outgoing="+entity.getBody()+"*");
+    		  log.info(mName+" outgoing="+entity.getBody()+"*");
     		  
     	      //HttpEntity<String> request = new HttpEntity<>(jsonStr);
     	      
