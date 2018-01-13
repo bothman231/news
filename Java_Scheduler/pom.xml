@@ -91,12 +91,20 @@
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		
-				<dependency>
+	
+	<!-- 			<dependency>
 			<groupId>com.microsoft.sqlserver</groupId>
 			<artifactId>sqljdbc4</artifactId>
-			<version>3.0</version>
-					<!--  <version>4.0</version>-->
-		</dependency>
+			<version>4.0</version>
+		</dependency>-->
+		
+		<!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
+<dependency>
+    <groupId>com.microsoft.sqlserver</groupId>
+    <artifactId>mssql-jdbc</artifactId>
+    <version>6.3.6.jre8-preview</version>
+</dependency>
+		
 		
     </dependencies>
 
