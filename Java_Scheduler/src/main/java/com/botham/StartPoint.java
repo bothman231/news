@@ -31,6 +31,8 @@ public class StartPoint {
     
     private static final Logger log = LoggerFactory.getLogger(StartPoint.class);
     
+    
+    /*
 	public static void main(String[] args) throws UnsupportedFlavorException, IOException {
       // doDbStuff();
        
@@ -49,6 +51,7 @@ public class StartPoint {
        
        //askQuestion();
 	}
+	*/
 	
 	
 	/*
