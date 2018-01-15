@@ -1,4 +1,4 @@
-package java.com.botham.base.test;
+package com.botham.base;
 
 import com.botham.base.BaseHelper;
 import com.botham.base.GlobalConstants;

@@ -1,4 +1,4 @@
-package com.botham.base.test;
+package com.botham.base;
 
 import com.botham.base.GlobalConstants;
 
