@@ -8,6 +8,28 @@
   <packaging>war</packaging>
   
   
+  
+  
+  <distributionManagement>
+    <repository>
+      <uniqueVersion>false</uniqueVersion>
+      <id>corp1</id>
+      <name>Corporate Repository</name>
+      <url>http://192.168.0.5:8081/nexus</url>
+      <layout>default</layout>
+    </repository>
+    
+    <snapshotRepository>
+      <uniqueVersion>true</uniqueVersion>
+      <id>propSnap</id>
+      <name>Propellors Snapshots</name>
+      <url>http://192.168.0.5:8081/nexus</url>
+      <layout>legacy</layout>
+    </snapshotRepository>
+  </distributionManagement>
+  
+  
+  
 
 
     <parent>
