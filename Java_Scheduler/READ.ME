@@ -1,3 +1,5 @@
+For now rename the resulting build from Java_Scheduler to server.war
+
 This is a real simple example of a spring boot executable .war.
 You can take the generated .war (as created by maven install) and
 drop it on any machine running java
@@ -9,6 +11,13 @@ You can use this as a heart beat from a remote system.
 set env vars
 B_CONFIG_ROOT=c:\unique
 B_SYSTEM_NAME=hudzen10
+
+
+The communication happens from client to server using hostnames, so we need to make sure ip's havnt changed
+update etc/hosts accordingly..
+
+example: client runs on hudzen10, server can also run on hudzen10, server updates DB at fncserver3 so each of these
+host entries need to point to correct ips.
 
 Also create a config.properties file at c:\{B_CONFIG_ROOT}\JAVA_CONF\${INSTANCE} with at least a node 
 entry in it 

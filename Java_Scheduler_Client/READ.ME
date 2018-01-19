@@ -1,3 +1,5 @@
+For now rename the resulting build from Java_Scheduler_Client to client.war
+
 This is a real simple example of a spring boot executable .war.
 You can take the generated .war (as created by maven install) and
 drop it on any machine running java
@@ -14,6 +16,9 @@ Also create a config.properties file at c:\{B_CONFIG_ROOT}\JAVA_CONF\${INSTANCE}
 entry in it 
 i.e.
 node=01
+also add checkInUrl property to this file..that corresponds to where the server is running
+i.e. checkInUrl=http://fncserver3:5900/api/checkin
+
 
 java -jar -Dinstance=A js.war
 
