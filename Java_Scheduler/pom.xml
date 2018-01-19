@@ -10,23 +10,18 @@
   
   
   
-  <distributionManagement>
+    <distributionManagement>
     <repository>
-      <uniqueVersion>false</uniqueVersion>
-      <id>corp1</id>
-      <name>Corporate Repository</name>
-      <url>http://192.168.0.5:8081/nexus</url>
-      <layout>default</layout>
+        <id>nexus</id>
+        <name>RepositoryProxy</name>
+        <url>http://172.17.0.3:8081/nexus/content/repositories/releases</url>
     </repository>
-    
     <snapshotRepository>
-      <uniqueVersion>true</uniqueVersion>
-      <id>propSnap</id>
-      <name>Propellors Snapshots</name>
-      <url>http://192.168.0.5:8081/nexus</url>
-      <layout>legacy</layout>
+        <id>nexus</id>
+        <name>RepositoryProxy</name>
+             <url>http://172.17.0.3:8081/nexus/content/repositories/snapshots</url>
     </snapshotRepository>
-  </distributionManagement>
+</distributionManagement>
   
   
   
