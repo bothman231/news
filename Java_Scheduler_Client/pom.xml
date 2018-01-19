@@ -22,7 +22,7 @@
         <id>nexus</id>
         <name>RepositoryProxy</name>
         <!-- <url>http://172.17.0.3:8081/nexus/content/repositories/snapshots</url>-->
-        <url>http://172.17.0.3:8081/nexus/content/repositories/apache-snapshots</url>
+             <url>http://172.17.0.3:8081/nexus/content/repositories/snapshots</url>
     </snapshotRepository>
 </distributionManagement>
 
