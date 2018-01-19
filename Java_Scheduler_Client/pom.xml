@@ -8,6 +8,22 @@
   <packaging>war</packaging>
   
   
+  
+  
+  <distributionManagement>
+    <!-- use the following if you're not using a snapshot version. -->
+    <repository>
+        <id>nexus</id>
+        <name>RepositoryProxy</name>
+        <url>http://172.17.0.3:8081/nexus/content/repositories/releases</url>
+    </repository>
+    <!-- use the following if you ARE using a snapshot version. -->
+    <snapshotRepository>
+        <id>nexus</id>
+        <name>RepositoryProxy</name>
+        <url>http://172.17.0.3:8081/nexus/content/repositories/snapshots</url>
+    </snapshotRepository>
+</distributionManagement>
 
 
     <parent>
