@@ -36,7 +36,7 @@ public class Application {
     	}
     	
     	
-    	
+    	try {
     	//showContext();
     	
     	
@@ -46,8 +46,15 @@ public class Application {
     	//app.setBanner("STEVE");
     	
     	//app.getMainApplicationClass();
+    	
     	app.run();
-    	//SpringApplication.run(Application.class);
+    	
+    	//SpringApplication.run(Application.class); 
+    	} catch (Exception e) {
+    		log.error(mName+", Exception on start e.getMessage="+e.getMessage());
+    		log.error(mName+", e.getCause="+e.getCause().getMessage());
+    		
+    	}
     }
     
     

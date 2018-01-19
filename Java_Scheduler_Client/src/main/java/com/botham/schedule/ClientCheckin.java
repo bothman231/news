@@ -86,17 +86,22 @@ public class ClientCheckin {
 
 // This is a var passed from the JVM java -Dinstance=A
         
-// This seems to work on remote Tomcat server but not inside STS?        
+// This seems to work on remote Tomcat server but not inside STS?    
+// Works when passed as a java VM arg under arguments tab
+// -Dinstance=A
         String instance=System.getProperty("instance");
         log.debug(mName+" instance="+instance);
         // String node=System.getProperty("node"); // Comes from config.properties
         String node="";
         
         if (instance!=null) {
+        	
         	Properties prop = BaseHelper.getPropValues(configRoot, instance);
             node=prop.getProperty("node");  
             checkInUrl=prop.getProperty("checkInUrl");
             log.info(mName+" checkInUrl="+checkInUrl);
+        } else {
+        	log.error(mName+" Instance is null !!!");
         }
         
 		
