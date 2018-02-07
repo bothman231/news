@@ -12,8 +12,10 @@ import com.botham.db.resource.ResourceRepository;
 
 // I changed this, and again123
 
-@SpringBootApplication
-@EnableScheduling
+//@SpringBootApplication
+//@EnableScheduling
+
+
 //@Configuration
 // Works for 1,,, but fails when using 2 or more???
 //@ComponentScan(basePackages = {"com.botham.db.resource", "com.botham.schedule", 

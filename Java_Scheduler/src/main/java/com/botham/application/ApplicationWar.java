@@ -3,6 +3,7 @@ package com.botham.application;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
@@ -29,8 +30,8 @@ public class ApplicationWar extends SpringBootServletInitializer {
         return application.sources(ApplicationWar.class);
     }
     
-   // public static void main(String[] args) throws Exception {
-   //     SpringApplication.run(ApplicationWar.class, args);
-   // }
+    public static void main(String[] args) throws Exception {
+        SpringApplication.run(ApplicationWar.class, args);
+    }
 
 }

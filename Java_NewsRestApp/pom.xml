@@ -27,6 +27,7 @@
 	<properties>
 		<springBootStarterJpaVersion>1.5.7.RELEASE</springBootStarterJpaVersion>
 		<springBootStarterAopVersion>1.5.7.RELEASE</springBootStarterAopVersion>
+		<jackson.version>2.9.3</jackson.version>
 		<springBootWebStarterVersion>1.5.7.RELEASE</springBootWebStarterVersion>
 		<org.springframework.version>4.3.11.RELEASE</org.springframework.version>
 		<failOnMissingWebXml>false</failOnMissingWebXml>
@@ -142,6 +143,17 @@
 			         <version>${springBootStarterAopVersion}</version>
 		</dependency>
 		
+		
+		<dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-annotations</artifactId>
+    <version>${jackson.version}</version>
+</dependency>
+<dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-core</artifactId>
+    <version>${jackson.version}</version>
+</dependency>
 
 	</dependencies>
 
