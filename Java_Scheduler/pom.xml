@@ -9,19 +9,24 @@
   
   
   
+    <properties>
+        <java.version>1.8</java.version>
+        
+        <nexusserverurl>http://172.17.0.3:8081</nexusserverurl>
+    </properties>
   
-    <distributionManagement>
+  <distributionManagement>
     <repository>
         <id>nexus</id>
         <name>RepositoryProxy</name>
-        <url>http://172.17.0.3:8081/nexus/content/repositories/releases</url>
+        <url>${nexusserverurl}/nexus/content/repositories/releases</url>
     </repository>
     <snapshotRepository>
         <id>nexus</id>
         <name>RepositoryProxy</name>
-             <url>http://172.17.0.3:8081/nexus/content/repositories/snapshots</url>
+             <url>${nexusserverurl}/nexus/content/repositories/snapshots</url>
     </snapshotRepository>
-</distributionManagement>
+  </distributionManagement>
   
   
   
@@ -33,9 +38,9 @@
         <version>1.5.8.RELEASE</version>
     </parent>
 
-    <properties>
-        <java.version>1.8</java.version>
-    </properties>
+
+
+
 
     <dependencies>
         <dependency>
@@ -53,19 +58,13 @@
 			<version>1.5.7.RELEASE</version>
 		</dependency>
 		
-		
 	
-		
-		
-		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
 <dependency>
     <groupId>com.fasterxml.jackson.core</groupId>
     <artifactId>jackson-databind</artifactId>
     <version>2.9.2</version>
 </dependency>
 		
-		
-		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
 <dependency>
     <groupId>com.fasterxml.jackson.core</groupId>
     <artifactId>jackson-core</artifactId>
@@ -73,7 +72,6 @@
 </dependency>
 		
 		
-		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
 <dependency>
     <groupId>com.fasterxml.jackson.core</groupId>
     <artifactId>jackson-annotations</artifactId>
@@ -112,13 +110,6 @@
 		</dependency>
 		
 	
-	<!-- 			<dependency>
-			<groupId>com.microsoft.sqlserver</groupId>
-			<artifactId>sqljdbc4</artifactId>
-			<version>4.0</version>
-		</dependency>-->
-		
-		<!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
 <dependency>
     <groupId>com.microsoft.sqlserver</groupId>
     <artifactId>mssql-jdbc</artifactId>
@@ -127,6 +118,10 @@
 		
 		
     </dependencies>
+
+
+
+
 
     <build>
         <plugins>
@@ -212,16 +207,16 @@
 			
 			
 			
-			<plugin>
-	<groupId>org.apache.tomcat.maven</groupId>
-	<artifactId>tomcat7-maven-plugin</artifactId>
-   <version>2.2</version>
-	<configuration>
-		<url>http://192.168.1.5:8703/manager/text</url>
-		<server>TomcatServer</server>
-		<path>.</path>
-	</configuration>
-</plugin>
+<!-- 			<plugin> -->
+<!-- 	<groupId>org.apache.tomcat.maven</groupId> -->
+<!-- 	<artifactId>tomcat7-maven-plugin</artifactId> -->
+<!--    <version>2.2</version> -->
+<!-- 	<configuration> -->
+<!-- 		<url>http://192.168.1.5:8703/manager/text</url> -->
+<!-- 		<server>TomcatServer</server> -->
+<!-- 		<path>.</path> -->
+<!-- 	</configuration> -->
+<!-- </plugin> -->
 			
 			
 			
