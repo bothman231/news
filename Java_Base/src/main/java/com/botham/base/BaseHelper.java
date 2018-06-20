@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -24,6 +25,23 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class BaseHelper {
+	
+	public static final boolean defaultAllRequired=true;
+	
+	public static final String systemNameRef="B_SYSTEM_NAME";
+	public static final String configRootRef="B_CONFIG_ROOT";
+	public static final String instanceRef="instance";
+	public static final String nodeRef="node";
+	public static final String checkInUrlRef="checkInUrl";
+	public static final String javaConfRef="JAVA_CONF";
+	public static final String configPropertiesRef="config.properties";
+	
+	public static final String configRootDefault="c:"+System.getProperty("file.separator")+"unique";
+	
+	public static final String instanceDefault="A";
+	public static final String checkInUrlDefault="http://hudzen10:5900/api/checkin";
+	public static final String nodeDefault="01";
+	//public static final String driveDefault="c:";
 	
 	private static final Logger log = LoggerFactory.getLogger(BaseHelper.class);
 	
@@ -49,54 +67,55 @@ public class BaseHelper {
 		return build;
 	}
 	
+	@SuppressWarnings("unused")
 	public static Properties getPropValues(String configRoot, String instance) throws IOException, Exception {
-		String mName="getPropValues";
+		
+		String mName="BaseHelper:getPropValues";
+		
+		if (log.isDebugEnabled()) {
+			log.debug(mName+" Starts, configRoot="+configRoot+" instance="+instance);
+		}
+		
 		Properties prop = new Properties();
 		
 		InputStream inputStream=null;
 		
 		try {
 
+			String propFileName2 = configRoot+
+					               System.getProperty("file.separator")+
+					               BaseHelper.javaConfRef+
+					               System.getProperty("file.separator")+
+					               instance+
+					               System.getProperty("file.separator")+
+					               BaseHelper.configPropertiesRef;
 			
-			//String propFileName1 = "\\unique\\JAVA_CONF\\A\\config.properties";
-			String propFileName2 = configRoot+"\\JAVA_CONF\\"+instance+"\\config.properties";
-			log.debug(mName+" propFile="+propFileName2);
+			if (log.isDebugEnabled()) {
+			   log.debug(mName+" propFile="+propFileName2);
+			}
 			
 			File configFile=new File(propFileName2);
 			
 	        if (!configFile.exists()) {
-	           String message="B_CONFIG_ROOT is set to "+configRoot+" but file does not exist";
-	           if (log.isErrorEnabled()) {
-	              log.error(mName+" "+message);
-	           }
-	           throw new Exception(message);
+	           String message="property file does not exist @ "+propFileName2;
 	        }
- 
+	        
 			inputStream = new FileInputStream(propFileName2);
- 
-			if (inputStream != null) {
-				prop.load(inputStream);
-			} else {
-				throw new FileNotFoundException("property file '" + propFileName2 + "' not found ");
+			
+			if (inputStream == null) {
+		       String message="input stream is null";
 			}
- 
-			Date time = new Date(System.currentTimeMillis());
-			
-			
-
- 
-//Get the property value and print it out
-			//String node = prop.getProperty("node");
-			//log.info("node="+node);
-			
-
+	        
+            prop.load(inputStream);
+				  
 //Iterate over all props 
 			boolean showAllProps=false;
+			//boolean showAllProps=true;
 			if (showAllProps) {
 			   if (log.isDebugEnabled()) {
 			
 			      for (Map.Entry < Object, Object> i: prop.entrySet()) {
-			        log.debug("props="+i.getKey() + " " + i.getValue());
+			        log.debug(mName+" props="+i.getKey() + " " + i.getValue());
 			      }
 			   }
 			}
@@ -108,6 +127,14 @@ public class BaseHelper {
 			inputStream.close();
 		}
         return prop;
+	}
+	
+	
+	public static Properties defaultProps() {
+	   Properties prop = new Properties();
+ 	   prop.setProperty(nodeRef, nodeDefault);
+ 	   prop.setProperty(checkInUrlRef, checkInUrlDefault);		
+	   return prop;
 	}
 	
 	public static List<Storage> getRoots() {
@@ -222,4 +249,126 @@ public class BaseHelper {
 		return location;
 
 	}
+	
+	public static String getSystemName() {
+		String mName="BaseHelper:getSystemName";
+		
+		if (log.isDebugEnabled()) {
+			log.debug(mName+" Starts");
+		}
+		
+		String systemName="";
+		
+// These are env vars set at the OP SYS Level  
+// Must be set by whoever sets up the machine
+		
+		if (System.getenv(systemNameRef) !=null && !System.getenv(systemNameRef).isEmpty()) {
+             systemName=System.getenv(systemNameRef);
+             if (log.isDebugEnabled()) {
+                log.debug(mName+" "+systemNameRef+"="+systemName+"*");
+             }
+             return systemName;
+		} else {
+			if (log.isDebugEnabled()) {
+			   log.debug(mName+" "+systemNameRef+" is not present");
+			}			
+		}
+		
+		
+		java.net.InetAddress localMachine;
+		
+		try {
+			localMachine = java.net.InetAddress.getLocalHost();
+			systemName=localMachine.getHostName();
+			return systemName;
+			
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+			
+		}
+		
+		if (log.isDebugEnabled()) {
+			log.debug(mName+" Ends");
+		}
+		return "unknown";
+	}
+	
+	
+	public static String getConfigRoot() throws Exception {
+		String mName="BaseHelper:getConfigRoot";
+		
+		if (log.isDebugEnabled()) {
+			log.debug(mName+" Starts");
+		}
+		
+        String configRoot=System.getenv(configRootRef);      
+        
+        if (log.isDebugEnabled()) {
+        	log.debug(mName+" "+configRootRef+"="+configRoot+"*");
+        }
+    
+        if (configRoot==null || configRoot.isEmpty()) {
+  		   String errorMessage=configRootRef+" is not set ";
+    	   if (log.isErrorEnabled()) {
+    	      log.error(mName+" "+errorMessage);
+    	   }
+    	   
+    	   if (defaultAllRequired) {
+    	      configRoot=configRootDefault;
+    	      if (log.isDebugEnabled()) {
+    	         log.debug(mName+" defaulted to "+configRoot+"*");
+    	      }
+    	      return configRoot;
+    	   } else {
+    		  throw new Exception(errorMessage);
+    	   }
+    		  
+        }  else {
+    	   if (log.isDebugEnabled()) {
+    		  log.debug(mName+" "+configRootRef+"="+configRoot);
+    	   }
+    	   return configRoot;
+    	}
+    }
+	
+	
+	public static String getInstance() throws Exception {
+		String mName="BaseHelper:getInstance";
+		
+		if (log.isDebugEnabled()) {
+			log.debug(mName+" Starts");
+		}
+		
+ 
+        String instance=System.getProperty(instanceRef);
+        
+        if (log.isDebugEnabled()) {
+        	log.debug(mName+" "+instance+"="+instance+"*");
+        }
+    
+        if (instance==null || instance.isEmpty()) {
+  		   String errorMessage=instanceRef+" is not set ";
+    	   if (log.isErrorEnabled()) {
+    	      log.error(mName+" "+errorMessage);
+    	   }
+    	   
+    	   if (defaultAllRequired) {
+    	      instance=instanceDefault;
+    	      if (log.isDebugEnabled()) {
+    	         log.debug(mName+" defaulted to "+instance+"*");
+    	      }
+    	      return instance;
+    	   } else {
+    		  throw new Exception(errorMessage);
+    	   }
+    		  
+        }  else {
+    	   if (log.isDebugEnabled()) {
+    		  log.debug(mName+" "+instanceRef+"="+instance);
+    	   }
+    	   return instance;
+    	}
+    }
+	
+	
 }
