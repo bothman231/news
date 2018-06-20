@@ -44,6 +44,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 //@Component
 public class ScheduledTasks {
+	
+	private final boolean defaultAllRequired=true;
 
 	private String checkInTime;
 	
@@ -69,7 +71,9 @@ public class ScheduledTasks {
         String mName="reportCurrentTime";
 
         String configRoot=System.getenv("B_CONFIG_ROOT");        
-        log.debug(mName+" B_CONFIG_ROOT="+configRoot);
+        if (log.isDebugEnabled()) {
+           log.debug(mName+" B_CONFIG_ROOT="+configRoot);
+        }
         
         if (configRoot==null) {
         	if (log.isErrorEnabled()) {
@@ -96,6 +100,15 @@ public class ScheduledTasks {
             node=prop.getProperty("node");  
             checkInUrl=prop.getProperty("checkInUrl");
             log.info(mName+" checkInUrl="+checkInUrl);
+        } else {
+        	if (log.isErrorEnabled()) {
+        		log.error(mName+" instance is null");
+        	}
+        	if (defaultAllRequired) {
+        		instance="";
+        	} else {
+        	   throw new Exception("instance must be provided");
+        	}
         }
         
 		
@@ -193,7 +206,7 @@ public class ScheduledTasks {
     	
     	@PostConstruct
     	public void postContruct() {
-    		String mName="postConstruct";
+    		String mName="ScheduledTasks:postConstruct";
     		//getAnValue();
     		
 // These are env vars set at the OP SYS Level    

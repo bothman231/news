@@ -21,12 +21,14 @@ import com.botham.base.BaseHelper;
 public class SchedulingConfiguration implements SchedulingConfigurer {
 
 	 private static final Logger log = LoggerFactory.getLogger(SchedulingConfiguration.class);
+	 
   @Autowired
   ClientCheckin clientCheckin;
 
   @Override
   public void configureTasks(ScheduledTaskRegistrar taskRegistrar) {
-	  String mName="configureTasks";
+	  String mName="SchedulingConfiguration:configureTasks";
+	  System.out.println(mName+" Starts");
     taskRegistrar.addTriggerTask(() -> {
 		try {
 			
@@ -38,20 +40,36 @@ public class SchedulingConfiguration implements SchedulingConfigurer {
 		}
 	},
         triggerContext -> {
+        	log.debug(mName+" Starts");
         	Properties prop=null;
+        	Integer delay=10;
         	try {
-				 prop = BaseHelper.getPropValues("c:\\unique\\", "A");
+        		
+				 prop = BaseHelper.getPropValues(BaseHelper.configRootDefault, BaseHelper.instanceDefault);
+				 
+				 try { 
+					 delay=Integer.valueOf(prop.getProperty("clientSchedulerDelayInSecs"));                        
+				 } catch (Exception e) {
+					 System.out.println("cant get delay from props");
+				 }
+				 
 			} catch (IOException e) {
+				System.out.println("error "+e.getMessage());
 				e.printStackTrace();
 			} catch (Exception e) {
+				System.out.println("error "+e.getMessage());
 				e.printStackTrace();
 			}
-          Integer delay=Integer.valueOf(prop.getProperty("clientSchedulerDelayInSecs"));
+        	
+          
+          
           log.info(mName+" "+"delay is "+delay);
+          
           Instant nextTriggerTime = Instant.now().plus(delay, ChronoUnit.SECONDS);
           
           return Date.from(nextTriggerTime);
         });
+	  System.out.println(mName+" Ends");
   }
   
   

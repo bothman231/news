@@ -21,13 +21,17 @@ public class ScheduledTasks {
 
 	private static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
 
-	// @Scheduled(fixedRate = 300000) // 5 mins
-	@Scheduled(fixedRate = 300000) // 30 seconds
+	// @Scheduled(fixedRate = 300000) // 300 secs or 5 mins
+	// @Scheduled(fixedRate = 30000) // 30 seconds
+	@Scheduled(fixedRate = 10000) // 10 seconds
 	public void reportCurrentTime() throws Exception {
 
-		String mName = "reportCurrentTime";
+		String mName = "ScheduledTasks:reportCurrentTime";
 
-		log.info(mName + " The time is now {}", dateFormat.format(new Date()) + " ");
+		if (log.isInfoEnabled()) {
+			
+			log.info(mName + " The time is now {}", dateFormat.format(new Date()) + " ");
+		}
 
 	}
 

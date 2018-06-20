@@ -9,6 +9,7 @@ and it will run and loop based on the schedule set in the code.
 You can use this as a heart beat from a remote system.
 
 set env vars
+
 B_CONFIG_ROOT=c:\unique
 B_SYSTEM_NAME=hudzen10
 
@@ -16,7 +17,8 @@ B_SYSTEM_NAME=hudzen10
 The communication happens from client to server using hostnames, so we need to make sure ip's havnt changed
 update etc/hosts accordingly..
 
-example: client runs on hudzen10, server can also run on hudzen10, server updates DB at fncserver3 so each of these
+example: client runs on hudzen10, server can also run on hudzen10, server updates DB at 
+fncserver3 so each of these
 host entries need to point to correct ips.
 
 Also create a config.properties file at c:\{B_CONFIG_ROOT}\JAVA_CONF\${INSTANCE} with at least a node 
