@@ -3,9 +3,11 @@ package com.botham.schedule;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.UnknownHostException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Properties;
 import javax.annotation.PostConstruct;
 import org.slf4j.Logger;
@@ -31,13 +33,37 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 // Very simple spring boot scheduler app,
 // Runs every 5000 ms (5 secs).
 
+
+
+// Tests
+// Run without B_CONFIG_ROOT set
+// Run without passing instance=A - default to ""
+// Have no config file at B_CONFIG_ROOT/JAVA_CONF/A/config/properties
+// Have no node property - default to 01
+// Have no checkInUrl property - default to http://hudzen10:5900/api/checkin
+// If no B_SYSTEM_NAME use the remote ip address
+
+
+
+// On a new deployment...
+
+// B_CONFIG_ROOT is not set = default of c:\\unique
+// B_SYSTEM_NAME is not set = default of machine name
+// instance is not set      = default of a
+// config.properties will not be found and therefore
+// node=01 checkInUrl=http://hudzen10:5900/api/checkin
+
 @Component
 @RefreshScope
 @Configuration
 public class ClientCheckin {
+	
 
+	
 	public static boolean geoObtained = false;
+	
 	public static XLocation geoLocation = new XLocation();
+	
 	public static Integer cycles=0;
 	
 	private final String cName="Client ";
@@ -50,26 +76,20 @@ public class ClientCheckin {
     
     public static String systemName;
     
-    public static boolean includeStorage=true;
-    
+    //public static boolean includeStorage=true;
+    public static boolean includeStorage=false;
 
     public void doIt() throws Exception {
     	
         cycles++;
         String mName="doIt";
-        log.info(mName+" Starts ------------------- cycles="+cycles);
-
-        String configRoot=System.getenv("B_CONFIG_ROOT");        
-        log.debug(mName+" B_CONFIG_ROOT="+configRoot);
-        
-        if (configRoot==null) {
-        	if (log.isErrorEnabled()) {
-        	   log.error(mName+" B_CONFIG_ROOT is not set");
-        	}
-        	return;
-        }  else {
-        	log.debug(mName+" B_CONFIG_ROOT="+configRoot);
+        if (log.isInfoEnabled()) {
+           log.info(mName+" Starts ------------------- cycles="+cycles);
         }
+
+        String systemName=BaseHelper.getSystemName();
+        
+        String configRoot=BaseHelper.getConfigRoot();
         
         //XLocation geoLoctaion=new XLocation();
         
@@ -85,39 +105,55 @@ public class ClientCheckin {
       	 
 
 // This is a var passed from the JVM java -Dinstance=A
+
+        String instance=BaseHelper.getInstance();
         
-// This seems to work on remote Tomcat server but not inside STS?    
-// Works when passed as a java VM arg under arguments tab
-// -Dinstance=A
-        String instance=System.getProperty("instance");
         log.debug(mName+" instance="+instance);
-        // String node=System.getProperty("node"); // Comes from config.properties
-        String node="";
         
-        if (instance!=null) {
-        	
-        	Properties prop = BaseHelper.getPropValues(configRoot, instance);
-            node=prop.getProperty("node");  
-            checkInUrl=prop.getProperty("checkInUrl");
-            log.info(mName+" checkInUrl="+checkInUrl);
-        } else {
-        	log.error(mName+" Instance is null !!!");
-        }
+    	Properties prop = BaseHelper.getPropValues(configRoot, instance); 
+        
+    	String node="";
+    	if (prop.get(BaseHelper.nodeRef)==null || prop.get(BaseHelper.nodeRef).toString().isEmpty()) {
+    		if (BaseHelper.defaultAllRequired) {
+    	       node=BaseHelper.nodeDefault;
+    		} else {
+    		   throw new Exception(BaseHelper.nodeRef+" is not set");
+    		}
+
+    	}
+    	
+    	String checkinUrl="";
+    	if (prop.get(BaseHelper.checkInUrlRef)==null || prop.get(BaseHelper.checkInUrlRef).toString().isEmpty()) {
+
+   		   if (BaseHelper.defaultAllRequired) {
+     	      checkinUrl=BaseHelper.checkInUrlDefault;
+ 		   } else {
+ 		      throw new Exception(BaseHelper.checkInUrlRef+" is not set");
+ 		   }
+    	} else {
+    	   checkInUrl=prop.get(BaseHelper.checkInUrlRef).toString();
+    	}
+    	 
+
+
+
+        
+
         
 		
-        
+		Date time = new Date(System.currentTimeMillis());
+		
 		String javaVersion=System.getProperty("java.version");
+		
 		if (log.isInfoEnabled()) {
 			log.info(mName+" Java Version="+javaVersion);
 		}
 		
 		String build=BaseHelper.getBuildInfo();
 				
-//Gather all system info.
-		// 1 - Load the info.json from the CONFIG_ROOT
 
-		//Info info = new Info("fncserver3", "A", "c:\\unique");
 		Info info = new Info(systemName, instance, configRoot, javaVersion, build, new Timestamp(System.currentTimeMillis()));
+		
 		
 		if (includeStorage) {
 		   info.setStorageList(BaseHelper.getRoots());
@@ -180,25 +216,27 @@ public class ClientCheckin {
         	return jsonStr;
         }
     	
+        
+        
+        
+        
+        
+        
     	@PostConstruct
-    	public void postContruct() {
-    		String mName="postConstruct";
-    		//getAnValue();
-    		
-// These are env vars set at the OP SYS Level    
-    		if (System.getenv("B_SYSTEM_NAME") !=null &&
-    		    !System.getenv("B_SYSTEM_NAME").isEmpty()) {
-                 systemName=System.getenv("B_SYSTEM_NAME");
-                 log.debug(mName+" B_SYSTEM_NAME="+systemName);
-    		} else {
-    			log.error(mName+" B_SYSTEM_NAME is not present");
+    	public void postContruct() throws Exception {
+    		String mName="ClientCheckin:postConstruct";
+    		if (log.isDebugEnabled()) {
+    			log.debug(mName+" Starts");
     		}
-                		
+    		
+            BaseHelper.getSystemName();
+            BaseHelper.getConfigRoot();
+            
+    		if (log.isDebugEnabled()) {
+    			log.debug(mName+" Ends");
+    		}                		
     	}
     	
-
-    	
-
     	
     	
     	public HttpHeaders addRestHeaders() {
