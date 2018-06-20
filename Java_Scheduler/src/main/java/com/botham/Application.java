@@ -12,11 +12,13 @@ import com.botham.db.resource.ResourceRepository;
 
 // I changed this, and again123
 
-//@SpringBootApplication
-//@EnableScheduling
+@SpringBootApplication
+@EnableScheduling
 
 
 //@Configuration
+
+
 // Works for 1,,, but fails when using 2 or more???
 //@ComponentScan(basePackages = {"com.botham.db.resource", "com.botham.schedule", 
 		//                       "com.botham.controllers", "com.botham"})
@@ -56,6 +58,7 @@ public class Application {
     	
     	//SpringApplication.run(Application.class); 
     	} catch (Exception e) {
+    		e.printStackTrace();
     		log.error(mName+", Exception on start e.getMessage="+e.getMessage());
     		log.error(mName+", e.getCause="+e.getCause().getMessage());
     		

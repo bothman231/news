@@ -7,8 +7,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-@SpringBootApplication
-@EnableScheduling
+// Comment for war deploy to tomcat
+//@SpringBootApplication
+//@EnableScheduling
+
+
+
 //@Configuration
 // Works for 1,,, but fails when using 2 or more???
 //@ComponentScan(basePackages = {"com.botham.db.resource", "com.botham.schedule", 
@@ -28,6 +32,7 @@ public class Application {
     
     public static void main(String[] args) throws Exception {
     	String mName="Application";
+    	System.out.println(mName);
     	if (log.isDebugEnabled()) {
     		log.debug(mName+" Starts");
     	}
