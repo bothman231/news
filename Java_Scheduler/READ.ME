@@ -18,7 +18,7 @@ The communication happens from client to server using hostnames, so we need to m
 update etc/hosts accordingly..
 
 example: client runs on hudzen10, server can also run on hudzen10, server updates DB at 
-fncserver3 so each of these
+db shown in application.properties so each of these
 host entries need to point to correct ips.
 
 Also create a config.properties file at c:\{B_CONFIG_ROOT}\JAVA_CONF\${INSTANCE} with at least a node 
@@ -45,4 +45,10 @@ docker run java_scheduler:1
 1) Run locally inside STS
 2) Run inside c:\unique\automation\jobs\startup
 3) Run inside docker
+
+
+
+Code flow:-
+	Application.java		
+   
 

@@ -67,11 +67,9 @@ public class MyRestController {
 
 		archiveFile();
 
-		// doDbStuff();
 		try {
 			doDb();
 		} catch (MetaDataAccessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -262,7 +260,9 @@ public class MyRestController {
 	}
 
 	public void updateResourceAssets(String infoKey, List<Storage> storageList) {
+		
 		List<ResourceAsset> ra = new ArrayList<>();
+		
 		for (Storage s : storageList) {
 			ResourceAssetPK rapk = new ResourceAssetPK(infoKey, s.getName());
 			ra.add(new ResourceAsset(rapk));

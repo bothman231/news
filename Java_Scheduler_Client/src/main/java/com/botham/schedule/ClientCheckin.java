@@ -79,10 +79,16 @@ public class ClientCheckin {
     //public static boolean includeStorage=true;
     public static boolean includeStorage=false;
 
+    
+    
+    
+    
     public void doIt() throws Exception {
     	
         cycles++;
+        
         String mName="doIt";
+        
         if (log.isInfoEnabled()) {
            log.info(mName+" Starts ------------------- cycles="+cycles);
         }
@@ -123,6 +129,7 @@ public class ClientCheckin {
     	}
     	
     	String checkinUrl="";
+    	
     	if (prop.get(BaseHelper.checkInUrlRef)==null || prop.get(BaseHelper.checkInUrlRef).toString().isEmpty()) {
 
    		   if (BaseHelper.defaultAllRequired) {
@@ -255,7 +262,10 @@ public class ClientCheckin {
     	    return new RestTemplate(requestFactory);
     	}
     	
-    	// http://www.baeldung.com/rest-template    	
+    	
+    	
+// http://www.baeldung.com/rest-template
+    	
 // Calls the Checkin rest API    	
     	
     	public void checkIn(Info info) { 

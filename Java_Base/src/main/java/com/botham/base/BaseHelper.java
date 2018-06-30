@@ -73,7 +73,7 @@ public class BaseHelper {
 		String mName="BaseHelper:getPropValues";
 		
 		if (log.isDebugEnabled()) {
-			log.debug(mName+" Starts, configRoot="+configRoot+" instance="+instance);
+			log.debug(mName+" Starts, loading properties from, configRoot="+configRoot+" instance="+instance);
 		}
 		
 		Properties prop = new Properties();

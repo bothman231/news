@@ -12,8 +12,12 @@ import com.botham.db.resource.ResourceRepository;
 
 // I changed this, and again123
 
+
+
 @SpringBootApplication
 @EnableScheduling
+
+
 
 
 //@Configuration
@@ -31,13 +35,15 @@ import com.botham.db.resource.ResourceRepository;
   //      "com.botham.controllers", "com.botham"})
 public class Application {
 
-	   @Autowired
-	   ResourceRepository repository;
+	@Autowired
+	ResourceRepository repository;  // In Java_BothamRepo
 	
     private static final Logger log = LoggerFactory.getLogger(Application.class);
     
     public static void main(String[] args) throws Exception {
-    	String mName="Application";
+    	
+    	String mName="Application.main";
+    	
     	if (log.isDebugEnabled()) {
     		log.debug(mName+" Starts");
     	}
