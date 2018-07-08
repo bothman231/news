@@ -159,7 +159,9 @@ public class ClientCheckin {
 		String build=BaseHelper.getBuildInfo();
 				
 
-		Info info = new Info(systemName, instance, configRoot, javaVersion, build, new Timestamp(System.currentTimeMillis()));
+		String clientVersion="ALPHA";
+		
+		Info info = new Info(systemName, instance, configRoot, javaVersion, build, new Timestamp(System.currentTimeMillis()), clientVersion);
 		
 		
 		if (includeStorage) {
@@ -317,6 +319,8 @@ public class ClientCheckin {
     				                                                HttpMethod.POST, 
     				                                                entity, 
     				                                                Info.class);
+    		  
+    		  
     		  //ResponseEntity<Info> response = restTemplate.postForObject(checkInUrl, info, Info.class);
               //String s = restTemplate.getForObject(checkInUrl, String.class);
     		  

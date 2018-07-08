@@ -211,7 +211,7 @@ public class MyRestController {
 	@Transactional
 	public void processCheckin(Info info) {
 
-		String mName = "processCheckin(Info)";
+		String mName = "Server-processCheckin(Info)";
 
 		if (log.isInfoEnabled()) {
 			log.info(mName + " Starts, info=" + info.toString());
@@ -241,6 +241,7 @@ public class MyRestController {
 
 			exists.setCheckinServer(thisSystemName);
 			exists.setTimeAtRemote(info.getLocalTime());
+			exists.setClientVersion(info.getClientVersion());
 			repository.save(exists);
 		} else {
 			Resource new1 = new Resource();
@@ -254,6 +255,7 @@ public class MyRestController {
 
 			new1.setCheckinServer(thisSystemName);
 			new1.setTimeAtRemote(info.getLocalTime());
+			new1.setClientVersion(info.getClientVersion());
 			repository.save(new1);
 		}
 

@@ -19,6 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -205,6 +206,10 @@ public class BaseHelper {
 	}
 	
 	
+	
+// This is a public server that takes an IP address an returns its geo info
+// Including ISP info.
+	
 	public static XLocation ipToGeo(String ip) {
 		String mName="ipToGeo";
 		RestTemplate restTemplate = new RestTemplate();
@@ -217,7 +222,16 @@ public class BaseHelper {
 
 		HttpHeaders httpHeaders = new HttpHeaders();
 		httpHeaders.add("Accept", "application/json");
-		ResponseEntity<String> response = restTemplate.getForEntity(fooResourceUrl + "", String.class);
+		ResponseEntity<String> response=null;
+		
+		try {
+			response = restTemplate.getForEntity(fooResourceUrl + "", String.class);
+		} catch (Exception e) {
+			if (log.isErrorEnabled()) {
+				log.error(mName+" Caught Exception here "+e.getMessage()+" "+e.getClass());
+			}
+			return new XLocation(ip, "COULD NOT DETERMIN LOCATION");
+		}
 
 		if (log.isDebugEnabled()) {
 		   log.debug(mName+" "+response.toString());
@@ -233,10 +247,28 @@ public class BaseHelper {
 			}
 
 		} catch (JsonProcessingException e) {
-			e.printStackTrace();
+			if (log.isErrorEnabled()) {
+			   log.error(mName+" JsonPorcessingException");
+			}
+			return new XLocation(ip, "COULD NOT DETERMIN LOCATION");
+			//e.printStackTrace();
+			
 		} catch (IOException e) {
-			e.printStackTrace();
+			if (log.isErrorEnabled()) {
+				log.error(mName+" IOException");
+			}
+			return new XLocation(ip, "COULD NOT DETERMIN LOCATION");
+			//e.printStackTrace();
+		
+		} catch (ResourceAccessException e) {
+			if (log.isErrorEnabled()) {
+				log.error(mName+" ResourceAccessException");
+			}
+			return new XLocation(ip, "COULD NOT DETERMIN LOCATION");
+			//e.printStackTrace();
 		}
+		
+		
 
 		// assertThat(response.getStatusCode(), equals(HttpStatus.OK));
 

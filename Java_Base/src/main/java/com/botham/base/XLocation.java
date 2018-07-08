@@ -21,6 +21,17 @@ public class XLocation implements Serializable {
 		this.region="";
 	}
 	
+	public XLocation(String ip, String city) {
+		this.ip=ip;
+		this.city=city;
+		
+		this.country="";
+		this.loc="";
+		this.org="";
+		this.postal="";
+		this.region="";
+	}
+	
 	private String ip;
 	private String city;
 

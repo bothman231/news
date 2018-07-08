@@ -124,7 +124,10 @@ public class ScheduledTasks {
 		// 1 - Load the info.json from the CONFIG_ROOT
 
 		//Info info = new Info("fncserver3", "A", "c:\\unique");
-		Info info = new Info(systemName, instance, configRoot, javaVersion, build, new Timestamp(System.currentTimeMillis()));
+		
+		
+		String clientVersion="ALPHA";
+		Info info = new Info(systemName, instance, configRoot, javaVersion, build, new Timestamp(System.currentTimeMillis()), clientVersion);
 		
 		//infoJsonToPojo();
 		infoPojoToJson(info);

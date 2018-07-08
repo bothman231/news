@@ -182,8 +182,21 @@ public class Resource implements Serializable {
 		this.timeAtRemote = timeAtRemote;
 	}
 
+	public String getClientVersion() {
+		return clientVersion;
+	}
+
+	public void setClientVersion(String clientVersion) {
+		this.clientVersion = clientVersion;
+	}
+
+
 	@Column(name = "time_at_remote")
 	private Timestamp timeAtRemote;
+	
+	
+	@Column(name = "client_version", length = 20)
+	private String clientVersion;
 	
 	
 }

@@ -42,7 +42,9 @@ public String toString() {
 }
 
 public Info(String systemName, String instance, String configRoot, 
-		    String javaVersion, String build, Timestamp localTime) {
+		    String javaVersion, String build, Timestamp localTime,
+		    String clientVersion) {
+	
 	super();
 	this.systemName = systemName;
 	this.instance = instance;
@@ -54,6 +56,7 @@ public Info(String systemName, String instance, String configRoot,
 	this.build=build;
 	this.localTime=localTime;
 	this.geoLocation=new XLocation();
+	this.clientVersion=clientVersion;
 
 	
 }
@@ -81,6 +84,10 @@ public void setConfigRoot(String configRoot) {
 private String instance;
 private String configRoot;
 private List<Storage> storageList;
+
+
+private String clientVersion;
+
 
 public List<Storage> getStorageList() {
 	return storageList;
@@ -123,6 +130,14 @@ public XLocation getGeoLocation() {
 
 public void setGeoLocation(XLocation geoLocation) {
 	this.geoLocation = geoLocation;
+}
+
+public String getClientVersion() {
+	return clientVersion;
+}
+
+public void setClientVersion(String clientVersion) {
+	this.clientVersion = clientVersion;
 }
 
 private Timestamp localTime;

@@ -41,7 +41,9 @@ public class ScheduledTasks {
 	
 	//@Scheduled(fixedRateString = "${schedTime}") // 20 seconds"
 	public void anotherTime() throws Exception {
-		log.info("The time is now {}", dateFormat.format(new Date()));
+	   if (log.isInfoEnabled()) {
+		  log.info("The time is now {}", dateFormat.format(new Date()));
+	   }
 		// anotherTime.
 	}
 
