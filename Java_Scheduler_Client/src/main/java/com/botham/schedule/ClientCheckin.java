@@ -276,7 +276,7 @@ public class ClientCheckin {
     	   
 // This needs to come from local config..  as it will be
 // Localhost for this machine
-// Internal ip for anothe machine on this network 192.168.1.100
+// Internal ip for another machine on this network 192.168.1.100
 // External ip for a remote machine
     	   //String checkInUrl="http://localhost:8073/api/checkin";
     	   
@@ -308,12 +308,10 @@ public class ClientCheckin {
     		  
     		  //HttpEntity<Info> entity = new HttpEntity<Info>(jsonStr, addRestHeaders());
     		  
-    		  log.info(mName+" outgoing="+entity.getBody()+"*");
-    		  
-    	      //HttpEntity<String> request = new HttpEntity<>(jsonStr);
-    	      
-    	      
-    	      log.info(mName+" checkInUrl="+checkInUrl);
+    		  if (log.isInfoEnabled()) {
+    		     log.info(mName+" outgoing="+entity.getBody()+"*");
+    	         log.info(mName+" checkInUrl="+checkInUrl);
+    		  }
     	      
     		  ResponseEntity<Info> response = restTemplate.exchange(checkInUrl, 
     				                                                HttpMethod.POST, 
@@ -331,6 +329,11 @@ public class ClientCheckin {
     	   } catch (Exception e) {
     		  log.error(mName+" error="+e.getMessage());
     		  log.error(mName+" CHECKIN SERVER IS NOT UP AT "+checkInUrl);
+    		  
+    		  
+    		  cantCheckin();
+    		  
+    		  
     		  //e.printStackTrace();
     		  //System.exit(0);
     		  
@@ -339,6 +342,17 @@ public class ClientCheckin {
            
     	    
     	   
+    	}
+    	
+    	
+    	public void cantCheckin() {
+    		// TODO add code here to notify the checkin server is 
+    		// 1) Not up
+    		// 2) Cant be reached for another reason... (ip change? maybe?)
+    		
+    		// Notify via email?
+    		// Notify via text?
+    		
     	}
     	
 

@@ -28,7 +28,10 @@ public class SchedulingConfiguration implements SchedulingConfigurer {
   @Override
   public void configureTasks(ScheduledTaskRegistrar taskRegistrar) {
 	  String mName="SchedulingConfiguration:configureTasks";
-	  System.out.println(mName+" Starts");
+	  
+	  
+	System.out.println(mName+" Starts");
+	
     taskRegistrar.addTriggerTask(() -> {
 		try {
 			
@@ -63,7 +66,9 @@ public class SchedulingConfiguration implements SchedulingConfigurer {
         	
           
           
-          log.info(mName+" "+"delay is "+delay);
+          if (log.isInfoEnabled()) {
+        	  log.info(mName+" "+"delay is "+delay+" See .clientSchedulerDelayInSecs");
+          }
           
           Instant nextTriggerTime = Instant.now().plus(delay, ChronoUnit.SECONDS);
           
