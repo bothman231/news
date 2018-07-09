@@ -42,7 +42,7 @@ public String toString() {
 }
 
 public Info(String systemName, String instance, String configRoot, 
-		    String javaVersion, String build, Timestamp localTime,
+		    String javaVersion, String build, String localTime,
 		    String clientVersion) {
 	
 	super();
@@ -116,11 +116,11 @@ public void setBuild(String build) {
 }
 
 
-public Timestamp getLocalTime() {
+public String getLocalTime() {
 	return localTime;
 }
 
-public void setLocalTime(Timestamp localTime) {
+public void setLocalTime(String localTime) {
 	this.localTime = localTime;
 }
 
@@ -140,7 +140,7 @@ public void setClientVersion(String clientVersion) {
 	this.clientVersion = clientVersion;
 }
 
-private Timestamp localTime;
+private String localTime;
 
    
 

@@ -11,6 +11,7 @@ import java.net.Proxy;
 import java.net.Proxy.Type;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.ZonedDateTime;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Map;
@@ -127,19 +128,21 @@ public class ScheduledTasks {
 		
 		
 		String clientVersion="ALPHA";
-		Info info = new Info(systemName, instance, configRoot, javaVersion, build, new Timestamp(System.currentTimeMillis()), clientVersion);
+		Info info = new Info(systemName, instance, configRoot, javaVersion, build, ZonedDateTime.now().toString(), clientVersion);
 		
 		//infoJsonToPojo();
 		infoPojoToJson(info);
 			
 		//info=getRoots(systemName, instance, configRoot);
 		
-		Timestamp currentTime=new Timestamp(System.currentTimeMillis());
-		info.setLocalTime(currentTime);
+		//Timestamp currentTime=new Timestamp(System.currentTimeMillis());
+		//info.setLocalTime(currentTime);
 		
 		checkIn(info);
 			
-        log.info(cName+mName+" The time is now {}", dateFormat.format(currentTime)+" "+systemName+" instance="+instance+" node="+node);
+        if (log.isInfoEnabled()) {
+        	log.info(cName+mName+" The time is now {}", info.getLocalTime()+" "+systemName+" instance="+instance+" node="+node);
+        }
         
     }
     
@@ -159,7 +162,11 @@ public class ScheduledTasks {
 		boolean debug=false;
 		
 		String mName = "getAnValue";
-		log.info(mName + " Starts");
+		
+		if (log.isInfoEnabled()) {
+			log.info(mName + " Starts");
+		}
+		
 		// This class
 		Method[] methods = ScheduledTasks.class.getMethods();
 		// All of its methods

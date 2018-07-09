@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.net.UnknownHostException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.time.ZonedDateTime;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Properties;
@@ -161,7 +162,7 @@ public class ClientCheckin {
 
 		String clientVersion="ALPHA";
 		
-		Info info = new Info(systemName, instance, configRoot, javaVersion, build, new Timestamp(System.currentTimeMillis()), clientVersion);
+		Info info = new Info(systemName, instance, configRoot, javaVersion, build, ZonedDateTime.now().toString(), clientVersion);
 		
 		
 		if (includeStorage) {
@@ -177,13 +178,15 @@ public class ClientCheckin {
 			
 		//info=getRoots(systemName, instance, configRoot);
 		
-		Timestamp currentTime=new Timestamp(System.currentTimeMillis());
-		info.setLocalTime(currentTime);
+		//Timestamp currentTime=new Timestamp(System.currentTimeMillis());
+		//info.setLocalTime(currentTime);
 		
 		checkIn(info);
 			
-        log.info(cName+mName+" The time is now {}", dateFormat.format(currentTime)+" "+systemName+" instance="+instance+" node="+node);
-        log.info(mName+" Ends --------------------------- cycles="+cycles);
+        if (log.isInfoEnabled()) {
+           log.info(cName+mName+" The time is now {}", info.getLocalTime()+" "+systemName+" instance="+instance+" node="+node);        
+           log.info(mName+" Ends --------------------------- cycles="+cycles);
+        }
 
         
     }

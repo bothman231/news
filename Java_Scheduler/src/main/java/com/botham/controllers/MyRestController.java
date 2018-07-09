@@ -240,7 +240,9 @@ public class MyRestController {
 			updateResourceAssets(info.getSystemName(), info.getStorageList());
 
 			exists.setCheckinServer(thisSystemName);
+			
 			exists.setTimeAtRemote(info.getLocalTime());
+			
 			exists.setClientVersion(info.getClientVersion());
 			repository.save(exists);
 		} else {
@@ -254,7 +256,9 @@ public class MyRestController {
 			updateResourceAssets(info.getSystemName(), info.getStorageList());
 
 			new1.setCheckinServer(thisSystemName);
+			
 			new1.setTimeAtRemote(info.getLocalTime());
+			
 			new1.setClientVersion(info.getClientVersion());
 			repository.save(new1);
 		}

@@ -174,11 +174,11 @@ public class Resource implements Serializable {
 		this.checkinServer = checkinServer;
 	}
 
-	public Timestamp getTimeAtRemote() {
+	public String getTimeAtRemote() {
 		return timeAtRemote;
 	}
 
-	public void setTimeAtRemote(Timestamp timeAtRemote) {
+	public void setTimeAtRemote(String timeAtRemote) {
 		this.timeAtRemote = timeAtRemote;
 	}
 
@@ -192,7 +192,7 @@ public class Resource implements Serializable {
 
 
 	@Column(name = "time_at_remote")
-	private Timestamp timeAtRemote;
+	private String timeAtRemote;
 	
 	
 	@Column(name = "client_version", length = 20)
