@@ -42,11 +42,9 @@ pipeline {
             steps {
                 notifyStarted("Build started", "")
                 
-                echo "888"
-                echo 'Building..1'
                 echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-                // export JENKINS_MAVEN_AGENT_DISABLED=true
-                sh 'mvn -f ${jobName}/ -B install'
+                
+                sh 'mvn -f "${jobName}"/ -B install'
                 
                 notifyStarted("Build ended", "")
             }
