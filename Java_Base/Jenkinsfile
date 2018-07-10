@@ -34,6 +34,29 @@ pipeline {
            }
         }        
         
+        
+        
+        
+        
+        stage('Build') {
+            steps {
+                notifyStarted("Build started", "")
+                
+                echo "888"
+                echo 'Building..1'
+                echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+                // export JENKINS_MAVEN_AGENT_DISABLED=true
+                sh 'mvn -f Java_Base/ -B install'
+                
+                notifyStarted("Build ended", "")
+            }
+        }
+        
+        
+                
+        
+        
+        
         /* Comment this until Sonar is up and running */
         /* check for existence of sonar before running this step? */
         
@@ -57,19 +80,12 @@ pipeline {
         }
         
         
-        stage('Build') {
-            steps {
-                notifyStarted("Build started", "")
-                
-                echo "888"
-                echo 'Building..1'
-                echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
-                // export JENKINS_MAVEN_AGENT_DISABLED=true
-                sh 'mvn -f Java_Base/ -B install'
-                
-                notifyStarted("Build ended", "")
-            }
-        }
+        
+        
+        
+        
+        
+
         
         stage('Test') {
             steps {
