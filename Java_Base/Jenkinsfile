@@ -46,6 +46,8 @@ pipeline {
                 
                 sh '"mvn -f ${jobName}/ -B install"'
                 
+                sh 'mvn -f Java_Base/ -B install'
+                
                 notifyStarted("Build ended", "")
             }
         }
