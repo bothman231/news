@@ -11,9 +11,8 @@ import com.botham.base.GlobalConstants;
 
 
 
-@Entity 
-@Table(name = "jobs")
-public class Jobs implements Serializable {
+
+public class JobsMirror implements Serializable {
 
 	private static final long serialVersionUID = 8781208166016497520L;
 	
@@ -23,14 +22,13 @@ public class Jobs implements Serializable {
 	public static final String CURRENT_STATUS_COMPLETE="C";
 	public static final String STATUS_ERROR="E";
 	
-	public Jobs() {
+	public JobsMirror() {
 // Constructor
 		name="";
 		
 	}
 	
-	//@Id
-	@Column(name = "jobs_name", length = 50)
+
 	private String name;
 	
 	public String getName() {
@@ -57,13 +55,13 @@ public class Jobs implements Serializable {
 		this.status = status;
 	}
 
-	@Column(name = "jobs_description", length = 100)
+
 	private String description;
 	
-	@Column(name = "jobs_status", length = 1)
+
 	private String status;
 	
-	@Column(name = "jobs_current_status", length = 1)
+
 	private String currentStatus;
 	
 	public String getCurrentStatus() {
@@ -98,16 +96,16 @@ public class Jobs implements Serializable {
 		this.end = end;
 	}
 
-	@Column(name = "jobs_info", length = 100)
+
 	private String info;
 	
-	@Column(name = "jobs_start")
+
 	private java.sql.Timestamp start;
 	
-	@Column(name = "jobs_end")
+
 	private java.sql.Timestamp end;
 	
-	@Column(name = "jobs_last_run")
+
 	private java.sql.Timestamp lastRun;
 	
 	public java.sql.Timestamp getLastRun() {
@@ -115,13 +113,11 @@ public class Jobs implements Serializable {
 	}
 
 	public void setLastRun(java.sql.Timestamp lastRun) {
-		String mName="setLastRun";
-		System.out.println(mName+" called.............");
 		this.lastRun = lastRun;
 	}
 	
 	
-	@Column(name = "jobs_schedule", length = 1)
+
 	private String schedule;
 
 	public String getSchedule() {
@@ -132,8 +128,7 @@ public class Jobs implements Serializable {
 		this.schedule = schedule;
 	}
 	
-	@Id
-	@Column(name = "jobs_id")
+
 	private int id;
 	
 
@@ -145,14 +140,14 @@ public class Jobs implements Serializable {
 		this.id = id;
 	}
 	
-	@Column(name = "jobs_notifications_sent")
-	private Integer notificationsSent;
 
-	public Integer getNotificationsSent() {
+	private int notificationsSent;
+
+	public int getNotificationsSent() {
 		return notificationsSent;
 	}
 
-	public void setNotificationsSent(Integer notificationsSent) {
+	public void setNotificationsSent(int notificationsSent) {
 		this.notificationsSent = notificationsSent;
 	}
 
@@ -193,7 +188,7 @@ public class Jobs implements Serializable {
 		return sb.toString();
 	}
 	
-	@Column(name = "jobs_active_start")
+
 	private String activeStart;
 	
 
@@ -206,7 +201,7 @@ public class Jobs implements Serializable {
 		this.activeStart = activeStart;
 	}
 
-	@Column(name = "jobs_active_end")
+
 	private String activeEnd;
 
 	public String getActiveEnd() {
@@ -217,7 +212,7 @@ public class Jobs implements Serializable {
 		this.activeEnd = activeEnd;
 	}
 	
-	@Column(name = "jobs_allow_concurrent", length = 1)
+
 	private String allowConcurrent;
 
 	public String getAllowConcurrent() {
@@ -252,7 +247,7 @@ public class Jobs implements Serializable {
 	
 	
 	
-	@Column(name = "jobs_run_on_nodes", length = 25)
+
 	private String runOnNodes;
 
 	public String getRunOnNodes() {
@@ -264,7 +259,7 @@ public class Jobs implements Serializable {
 	}
 	
 	
-	@Column(name = "jobs_run_on_instances", length = 25)
+
 	private String runOnInstances;
 
 	public String getRunOnInstances() {
@@ -276,7 +271,7 @@ public class Jobs implements Serializable {
 	}
 	
 	
-	@Column(name = "jobs_status_acknowledged", length = 1)
+
 	private String statusAcknowledged;
 	
 	public String getStatusAcknowledged() {
