@@ -1,12 +1,10 @@
-package com.botham.news.domain.customer;
+package com.botham.cust.domain.customer;
 
 import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
 
 @Entity 
 @Table(name = "customer")
