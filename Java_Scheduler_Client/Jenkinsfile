@@ -1,0 +1,203 @@
+pipeline {
+    agent any
+    
+    
+    
+    tools {
+        maven 'Maven3.5'
+        jdk 'JDK8'
+    }
+   
+   
+
+   
+    stages {
+        stage('Init') {
+           steps {
+                         
+            script {
+                       envVars="${env.B_SYSTEM_NAME}"
+                    }
+                    
+              notifyStarted("Job started", "$envVars")
+              
+              
+                             echo 'Init'
+           
+           
+// 1 change           
+                    script {
+                       jobName="Java_Scheduler_Client"
+                    }
+              
+              echo "jobName=${jobName}"
+           }
+        }        
+        
+        
+        
+        
+        
+        stage('Build') {
+            steps {
+                notifyStarted("Build started", "")
+                
+                echo "Running ${env.BUILD_ID} on ${env.JENKINS_URL}"
+                
+                //sh '"mvn -f ${jobName}/ -B install"'
+                
+                sh 'mvn -f Java_Scheduler_Client/ -B install'
+                
+                notifyStarted("Build ended", "")
+            }
+        }
+        
+        
+                
+        
+        
+        
+        /* Comment this until Sonar is up and running */
+        /* check for existence of sonar before running this step? */
+        
+        stage('Sonarqube analysis') {
+           steps {
+              echo 'Sonarqube analysis'
+              
+              /*script {
+                 scannerHome = tool 'Sonar';
+              }
+              echo "scannerHome=${scannerHome}"
+               */
+       
+              withSonarQubeEnv('SonarServer') {
+                 //sh "${scannerHome}/bin/sonar-scanner"
+// 2 Change                 
+                  sh 'mvn -f Java_Base/ org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
+              }
+              
+           }
+        }
+        
+        
+        
+        
+        
+        
+        
+
+        
+        stage('Test') {
+            steps {
+                notifyStarted("Tests started", "")
+                
+                echo 'Testing.......1'
+// 3 Change                
+                sh 'mvn -f Java_Scheduler_Client/ -Dmaven.test.failure.ignore=true -B test'
+                
+                notifyStarted("Tests Ended", "")
+            }
+        }
+        
+        /* If this is enabled, the build will wait for manual intervention before proceeding */
+        
+        /*
+        stage('Checkup') {
+            steps {
+             input "Does the test look ok?"
+            }
+        }
+        */
+        
+        /*
+        stage('Deploy') {
+            steps {
+                def pom = readMavenPom file: 'pom.xml'
+                echo 'Deploying....1'
+                echo 'project.name=${project.name}'                
+                def version = pom.version.replace("-SNAPSHOT", ".${currentBuild.number}")
+                //echo 'pom.version='${pom.version}
+                echo 'version='${version}    
+                sh 'pwd'
+// 4 Change                
+                sh 'cp Java_Scheduler_Client/target/Java_Scheduler_Client-0.0.1-SNAPSHOT.war /tmp/Java_Scheduler_Client.war'
+            }
+        }
+        */
+        
+        /*
+        stage('DeployToArt') {
+           steps {
+             script {
+                 def uploadSpec = """{
+                 "files": [
+                 {
+                    "pattern": "Java_Scheduler_Client/Java_Scheduler_Client-0.0.1-SNAPSHOT.war",
+                    "target": "/libs-snapshot-local/"
+                 }
+                 ]
+              }"""
+              server.upload(uploadSpec)
+              }
+           }
+        }
+        */
+    
+        
+
+            
+            
+            
+            
+    } // Stages
+    
+    
+    
+        post {
+        
+           always {
+              echo "Post-always Updated from github"
+           }
+        
+           success {
+              echo "Post-success"
+           }
+        
+           failure {
+              echo "Post-failure"
+           }
+        
+        }
+        
+        
+    
+} // Pipeline
+
+
+    def notifyStarted(message, envVars) {
+    
+    
+  // send to Slack
+ // slackSend (color: '#FFFF00', message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+ 
+  // send to HipChat
+  //hipchatSend (color: 'YELLOW', notify: true,
+  //    message: "STARTED: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})"
+  //  )
+ 
+  // send to email
+  
+
+  
+  emailext (
+      
+      
+	 // envVars="B_SYSTEM_NAME=${B_SYSTEM_NAME}"
+
+      subject: "$message : Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'", to: '231saleln@gmail.com',
+
+      body: "$message : Job ${env.BUILD_URL} ${env.JOB_NAME} envVars=$envVars",
+
+      recipientProviders: [[$class: 'DevelopersRecipientProvider']]
+    )
+}
