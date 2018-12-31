@@ -5,14 +5,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
-// Comment for war deploy to tomcat
+// Comment for war deploy to tomcat and use Application as base class
 //@SpringBootApplication
 //@EnableScheduling
+//
 
 
-
+//
 //@Configuration
 // Works for 1,,, but fails when using 2 or more???
 //@ComponentScan(basePackages = {"com.botham.db.resource", "com.botham.schedule", 
@@ -29,6 +31,8 @@ public class Application {
 
 	
     private static final Logger log = LoggerFactory.getLogger(Application.class);
+    
+    
     
     public static void main(String[] args) throws Exception {
     	String mName="Application";
@@ -48,7 +52,9 @@ public class Application {
     	//app.setBanner("STEVE");
     	
     	//app.getMainApplicationClass();
+    	
     	app.run();
+    	
     	//SpringApplication.run(Application.class);
     }
     

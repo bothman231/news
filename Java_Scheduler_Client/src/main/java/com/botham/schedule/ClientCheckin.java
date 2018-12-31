@@ -160,7 +160,7 @@ public class ClientCheckin {
 		String build=BaseHelper.getBuildInfo();
 				
 
-		String clientVersion="ALPHA";
+		String clientVersion="BETA";
 		
 		Info info = new Info(systemName, instance, configRoot, javaVersion, build, ZonedDateTime.now().toString(), clientVersion);
 		

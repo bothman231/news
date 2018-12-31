@@ -262,6 +262,10 @@ public class MyRestController {
 			new1.setClientVersion(info.getClientVersion());
 			repository.save(new1);
 		}
+		
+		if (log.isInfoEnabled()) {
+			log.info(mName + " Ends");
+		}
 
 	}
 

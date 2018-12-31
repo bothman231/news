@@ -248,7 +248,7 @@ public class BaseHelper {
 
 		} catch (JsonProcessingException e) {
 			if (log.isErrorEnabled()) {
-			   log.error(mName+" JsonPorcessingException");
+			   log.error(mName+" JsonProcessingException");
 			}
 			return new XLocation(ip, "COULD NOT DETERMIN LOCATION");
 			//e.printStackTrace();
