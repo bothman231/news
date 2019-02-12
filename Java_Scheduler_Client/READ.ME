@@ -40,3 +40,20 @@ docker run java_scheduler:1
 2) Run inside c:\unique\automation\jobs\startup
 3) Run inside docker
 
+
+Tomcat you can also deploy this to a running TOMCAT instance:-
+some work is required on tomcat side, see the docs /Docs/Tomcat/deploy-from-maven
+
+There is an entry to a plugin in the pom that deals with the deployment
+
+you will also have to setup a run config in STS to do the deploy
+Right click on project/Run as/Run configurations/Create new 
+Basedir:	${workspace_loc:/Java_Scheduler_Client}
+Goals:		tomcat7:redeploy
+
+
+
+
+
+
+

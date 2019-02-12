@@ -66,6 +66,8 @@ public class ClientCheckin {
 	public static XLocation geoLocation = new XLocation();
 	
 	public static Integer cycles=0;
+	public static Integer checkinSuccess=0;
+	public static Integer checkinFailure=0;
 	
 	private final String cName="Client ";
 	
@@ -160,7 +162,7 @@ public class ClientCheckin {
 		String build=BaseHelper.getBuildInfo();
 				
 
-		String clientVersion="BETA";
+		String clientVersion="FOXTROT";
 		
 		Info info = new Info(systemName, instance, configRoot, javaVersion, build, ZonedDateTime.now().toString(), clientVersion);
 		
@@ -181,11 +183,27 @@ public class ClientCheckin {
 		//Timestamp currentTime=new Timestamp(System.currentTimeMillis());
 		//info.setLocalTime(currentTime);
 		
-		checkIn(info);
+		if (checkIn(info)) {
+			checkinSuccess++;
+		} else {
+			checkinFailure++;
+		}
 			
+		
         if (log.isInfoEnabled()) {
-           log.info(cName+mName+" The time is now {}", info.getLocalTime()+" "+systemName+" instance="+instance+" node="+node);        
+           log.info(cName+mName); 
+           log.info(cName+mName); 
+           log.info(cName+mName+" The time is now {}", info.getLocalTime()+" "+systemName+" instance="+instance+" node="+node);
+           log.info(mName+" Ends -------------------------- success="+checkinSuccess);
+           log.info(mName+" Ends -------------------------- failure="+checkinFailure);
            log.info(mName+" Ends --------------------------- cycles="+cycles);
+           log.info(cName+mName); 
+           log.info(cName+mName); 
+        }
+        
+        
+        for (int i=0;i<20;i++) {
+        	log.info(mName+" "+clientVersion);
         }
 
         
@@ -273,7 +291,7 @@ public class ClientCheckin {
     	
 // Calls the Checkin rest API    	
     	
-    	public void checkIn(Info info) { 
+    	public boolean checkIn(Info info) { 
     		
     	   String mName="checkIn";
     	   
@@ -327,7 +345,7 @@ public class ClientCheckin {
     		  
     		  
               
-              log.info(mName+" reponse="+response.getBody()+" "+response.getStatusCode());
+              log.info(mName+" response="+response.getBody()+" "+response.getStatusCode());
               
     	   } catch (Exception e) {
     		  log.error(mName+" error="+e.getMessage());
@@ -339,10 +357,11 @@ public class ClientCheckin {
     		  
     		  //e.printStackTrace();
     		  //System.exit(0);
+    		  return false;
     		  
     	   }
            
-           
+           return true;
     	    
     	   
     	}

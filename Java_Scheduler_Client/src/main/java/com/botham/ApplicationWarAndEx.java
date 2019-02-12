@@ -28,6 +28,8 @@ public class ApplicationWarAndEx extends SpringBootServletInitializer {
         configureApplication(new SpringApplicationBuilder()).run(args);
     }
 
+    
+    // Used to switch off the spring banner/header on startup
     private static SpringApplicationBuilder configureApplication(SpringApplicationBuilder builder) {
         return builder.sources(ApplicationWarAndEx.class).bannerMode(Banner.Mode.OFF);
     }
